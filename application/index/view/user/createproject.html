@@ -37,24 +37,24 @@
                             </select>
                         </div>
                     </div>
-                    <!--<div class="form-group">-->
-                        <!--<div class="group-title">-->
-                            <!--<span class="star">*</span>-->
-                            <!--<span class="title">组别</span>-->
-                        <!--</div>-->
-                        <!--<div class="group-content clearfix">-->
-                            <!--<select name="group_id" data-rule="required" class="form-control">-->
-                                <!--{foreach name="groupList" item="vo"}-->
-                                <!--<option value="{$vo.group_id}" {if $row.group_id == $vo.group_id}selected="selected"{/if}>{$vo.track_name."-".$vo.group_name}</option>-->
-                                <!--{/foreach}-->
-                            <!--</select>-->
-                        <!--</div>-->
-                    <!--</div>-->
+                    <div class="form-group">
+                        <div class="group-title">
+                            <span class="star">*</span>
+                            <span class="title">组别</span>
+                        </div>
+                        <div class="group-content clearfix">
+                            <select name="group_id" data-rule="required" class="form-control">
+                                {foreach name="groupList" item="vo"}
+                                <option value="{$vo.group_id}" {if $row.group_id == $vo.group_id}selected="selected"{/if}>{$vo.track_name."-".$vo.group_name}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <div class="group-title">
                             <span class="star">*</span>
-                            <span class="title">参赛作品名称</span>
+                            <span class="title">参赛主题名称</span>
                         </div>
                         <div class="group-content">
                             <input type="text" class="form-control color-readonly" maxlength="50" name='name' placeholder="简洁清晰，不多于50字。" id="item_name" value="{$row.item_name}" />
@@ -71,11 +71,11 @@
             </div>
             <div class="project-block wbg">
                 <div>
-                    <h2 class="h2-title">参赛作品介绍</h2>
+                    <h2 class="h2-title">参赛主题介绍</h2>
                     <div class="form-group textarea-group">
                         <div class="group-title">
                             <span class="star">*</span>
-                            <span class="title">参赛作品概述</span>
+                            <span class="title">参赛主题概述</span>
                         </div>
                         <div class="group-content textarea-box">
                             <div class="tip hidden">可拆分为产品描述、用户群体、参赛作品愿景、竞争对手等方面详细描述，不少于100字，但不超过1000字。</div>
