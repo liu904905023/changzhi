@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>吉林省高校就业指导网络课程教学大赛</title>
+    <link rel="stylesheet" href="__CDN__/assets/css/frontend/iconfont-1.0.0.css" />
+    <link rel="stylesheet" href="__CDN__/assets/css/frontend/bootstrap.min-1.0.0.css" />
+    <link rel="stylesheet" href="__CDN__/assets/css/frontend/cropper.css" />
+    <link rel="stylesheet" href="__CDN__/assets/css/frontend/new-edit-project.css" />
+    <link rel="stylesheet" href="__CDN__/assets/css/frontend/qu.css?r={$site.version}">
+    <link rel="stylesheet" href="__CDN__/assets/css/frontend/modal-1.0.0.css" />
+    <link rel="stylesheet" href="__CDN__/assets/css/frontend/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="__CDN__/assets/libs/fastadmin-citypicker/src/css/city-picker.css">
+    <script src="__CDN__/assets/js/frontend/jquery-2.2.4.min.js"></script>
+    <script src="__CDN__/assets/js/frontend/qu.js"></script>
+    <script src="__CDN__/assets/libs/plupload/js/plupload.full.min.js"></script>
+    <script src="__CDN__/assets/libs/plupload/js/i18n/zh_CN.js"></script>
+    <script src="__CDN__/assets/js/frontend/md5.js"></script>
+    <script src="__CDN__/assets/js/frontend/bootstrap.min.js"></script>
+    <script src="__CDN__/assets/js/frontend/common.js"></script>
+    <script src="__CDN__/assets/js/frontend/bootstrapValidator.js"></script>
+    <script src="__CDN__/assets/js/frontend/bootstrap-datetimepicker-1.0.0.js"></script>
+    <script src="__CDN__/assets/js/frontend/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="__CDN__/assets/js/frontend/select2.min.js"></script>
+    <script src="__CDN__/assets/js/ajaxfileupload.js"></script>
+    <script src="__CDN__/assets/libs/fastadmin-citypicker/src/city-picker.data.js"></script>
+    <script src="__CDN__/assets/libs/fastadmin-citypicker/src/city-picker.js"></script>
+    <script src="__CDN__/assets/libs/fastadmin-layer/dist/layer.js"></script>
+    <script>
+        var tutorErr = "";
+        var EdittutorErr = "";
+        var patentErr = "";
+        var EditpatentErr = "";
+    </script>
+    <script src="__CDN__/assets/js/frontend/new-project.js"></script>
+    <script src="__CDN__/assets/js/frontend/new-edit-project.js"></script>
+    <!--  操作 在 new-project.js 和 new-edit-project.js 里面  -->
+</head>
+<body>
+<!--  top  -->
+<div class="top lbg">
+    <a href="/" class="logo fl"><img style="width:399px;" src="__CDN__/assets/img/logo.png" alt="吉林省高校就业指导网络课程教学大赛
+"></a>
+    <div class="nav fl">
+        <a href="{:addon_url('cms/index/index')}">首页</a>
+        <a href="{:url('cms/c/news')}">大赛新闻</a>
+        <a href="{:url('cms/c/notice')}">大赛通知</a>
+    </div>
+    <div class="operat fr">
+        {if $user}
+            <a href="{:url('index/user/index')}">{$user.nickname}</a>
+            <a href="{:url('index/user/index')}" class="on">我的项目</a>
+        {else /}
+            <a href="{:url('index/user/login')}">登录</a>
+            <a href="{:url('index/user/register')}">注册</a>
+        {/if}
+
+        <a href="{:url('admin/index/login')}" class="manage_entry tc">管理入口</a>
+    </div>
+</div>
+
+        <main class="content">
+            {__CONTENT__}
+        </main>
+
+<!--  foot  -->
+<div class="foot hbg">
+
+</div>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?4a6c3ea97fc1be09f0fd3cc1a30507cf";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    (function() {var _53code = document.createElement("script");_53code.src = "https://tb.53kf.com/code/code/061c0643143fb48c0ba8ed392b950cb06/1?u_cust_id={$tetle}&u_cust_name={$tetle}&u_custom_info={$tetle}";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(_53code, s);})();
+
+</script>
+</body>
+</html>

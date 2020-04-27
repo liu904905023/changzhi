@@ -1,0 +1,139 @@
+<script src="__CDN__/assets/js/echarts.min.js"></script>
+<script src="__CDN__/assets/addons/cms/js/jquery-2.2.4.min.js"></script>
+<body>
+<div style="width: 100%;">
+    <div id="item_chart" style="width:1000px;height:600px;margin: auto;"></div>
+    <div id="student_chart" style="width:1000px;height:600px;margin: auto;"></div>
+</div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        getList();
+    });
+
+    //项目统计 名称 数量
+    var itemNames = [];
+    var itemNums = [];
+    //注册学生 名称 数量
+    var studentNames = [];
+    var studentNums = [];
+
+    function getList(){
+        $.ajax({
+            type: "post",
+            url: "__CDN__/admin/statistics/charts/index",
+            dataType: "json",
+            success: function(result){
+                var matchList = result.matchList;
+                var studentList = result.studentList;
+                if(matchList){
+                    for(var i = 0 ; i < matchList.length; i++){
+                        itemNames.push(matchList[i].school_name);
+                        itemNums.push(matchList[i].num);
+                    }
+                    initItemCharts();
+                }
+                if(studentList){
+                    for(var j = 0 ; j < studentList.length; j++){
+                        studentNames.push(studentList[j].school_name);
+                        studentNums.push(studentList[j].num);
+                    }
+                    initStudentCharts();
+                }
+            },
+            error: function(errmsg) {
+                alert("Ajax获取服务器数据出错了！"+ errmsg);
+            }
+        });
+    }
+
+    /**
+     * 项目统计
+     */
+    function initItemCharts(){
+        var item_chart = echarts.init(document.getElementById('item_chart'));
+        var options={
+            //定义一个标题
+            title:{
+                text:'项目统计图'
+            },
+            legend:{
+                data:['数量']
+            },
+            //X轴设置
+            xAxis:{
+                data:itemNames,
+                axisLabel:{
+                    interval:0,
+                    rotate:45
+                }
+            },
+            yAxis:{
+            },
+            grid: {
+                left: '10%',
+                //文字距离图表底部距离
+                bottom:'35%'
+            },
+            //name=legend.data的时候才能显示图例
+            series:[{
+                itemStyle: {
+                    normal: {
+                        color: '#a8bcd4'
+                    }
+                },
+                name:'数量',
+                type:'bar',
+                data:itemNums
+            }]
+
+        };
+        item_chart.setOption(options);
+    }
+
+    /**
+     * 注册用户统计
+     */
+    function initStudentCharts(){
+        // 初始化图表标签
+        var student_chart = echarts.init(document.getElementById('student_chart'));
+        var stu_options={
+            //定义一个标题
+            title:{
+                text:'注册用户统计图'
+            },
+            legend:{
+                data:['数量']
+            },
+            //X轴设置
+            xAxis:{
+                data:studentNames,
+                axisLabel:{
+                    interval:0,
+                    rotate:45
+                }
+            },
+            yAxis:{
+            },
+            grid: {
+                left: '10%',
+                bottom:'35%'
+            },
+            //name=legend.data的时候才能显示图例
+            series:[{
+                itemStyle: {
+                    normal: {
+                        color: '#3fa7dc'
+                    }
+                },
+                name:'数量',
+                type:'bar',
+                data:studentNums
+            }]
+
+        };
+        student_chart.setOption(stu_options);
+
+    }
+
+</script>

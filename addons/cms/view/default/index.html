@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{cms:config name="cms.title"/}</title>
+    <link rel="stylesheet" href="__ADDON__/css/qu.css?r={$site.version}">
+    <script type="text/javascript" src="__ADDON__/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="__ADDON__/js/jquery.SuperSlide.2.1.3.js"></script>
+</head>
+<body>
+    <!--  top  -->
+    {include file="common/top" /}
+    <!--  banner  -->
+    <div class="banner">
+        <div id="slideBox" class="slideBox">
+
+            <div class="bd">
+                <ul>
+                    <li><a href="" target="_blank"><img src="__ADDON__/img/aaa.jpg" /></a></li>
+                </ul>
+            </div>
+
+            <!-- 下面是前/后按钮代码，如果不需要删除即可 -->
+
+        </div>
+    </div>
+
+
+    <!--  jl_link  -->
+    <!--<div class="jl_link tc">-->
+        <!--<a href="{:url('index/user/index')}" class="jl_link_a1"><span>参赛报名</span></a>-->
+        <!--<a href="" class="jl_link_a2"><span>创新创业成果展</span></a>-->
+        <!--<a href="" class="jl_link_a3"><span>双对接双助力</span></a>-->
+        <!--<a href="" class="jl_link_a2"><span>“双创之星”评选</span></a>-->
+    <!--</div>-->
+
+    <!--  competition news  -->
+    <div class="competition_news" style="display: none;">
+        <div class="sect_title container tr competition_news_title"><a href=""></a></div>
+        <div class="container competition_news_sect">
+            <ul>
+                <li>
+                    <div class="cn_top">
+                        <span class="cn_year fsize18">2019</span>
+                        <span class="cn_date">11.01</span>
+                    </div>
+                    <div class="cn_bot">
+                        <span class="cn_tip">大赛公告</span>
+                        <p>第二届全国中医药高等院校大学生创新创业大赛评审规则</p>
+                        <a href="" class="lbg">查看详情 →</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="cn_top">
+                        <span class="cn_year fsize18">2019</span>
+                        <span class="cn_date">09.15</span>
+                    </div>
+                    <div class="cn_bot">
+                        <span class="cn_tip">大赛公告</span>
+                        <p>全国中医药高等院校大学生创新创业大赛初赛评审结束</p>
+                        <a href="" class="lbg">查看详情 →</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="cn_top">
+                        <span class="cn_year fsize18">2019</span>
+                        <span class="cn_date">08.31</span>
+                    </div>
+                    <div class="cn_bot">
+                        <span class="cn_tip">大赛公告</span>
+                        <p>大赛专家委员会对入围全国半决赛项目进行网上评审</p>
+                        <a href="" class="lbg">查看详情 →</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="cn_top">
+                        <span class="cn_year fsize18">2019</span>
+                        <span class="cn_date">06.15</span>
+                    </div>
+                    <div class="cn_bot">
+                        <span class="cn_tip">大赛公告</span>
+                        <p>专家组为获奖团队及单位颁奖</p>
+                        <a href="" class="lbg">查看详情 →</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!--  competition related  -->
+    <div class="comp_related">
+        <div class="sect_title container tr comp_related_title"><a name="ds"></a></div>
+        <div class="container comp_related_sect">
+            <ul class="borderRadius">
+                <li>
+                    <div class="cr_l">
+                        <p class="cr_title cr_title1">大赛组委会</p>
+                        <p class="cr_det">{$match_org}</p>
+                    </div>
+                    <div class="cr_r">
+                        <p class="cr_title cr_title2">专家委员会</p>
+                        <p class="cr_det">{$committee}</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="cr_l">
+                        <p class="cr_title cr_title3">大赛组委会联系方式</p>
+                        <p class="cr_det">{$match_org_contact}</p>
+                    </div>
+                    <div class="cr_r">
+                        <p class="cr_title cr_title4">参赛对象</p>
+                        <p class="cr_det">{$match_group}</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="cr_l">
+                        <p class="cr_title cr_title5">资料下载</p>
+                        <p class="cr_det">
+                            <a href="javascript:alert('完善中...');"  class="file_down">大赛通知</a>
+                            <a href="javascript:alert('完善中...');"  class="file_down">评审规则</a>
+                            <a href="/uploads/download/teacher.pdf" target="_blank" class="file_down">参赛教师操作手册</a>
+                            <a onclick="javascript:alert('完善中...');" class="file_down">大赛指南</a>
+                            <a onclick="javascript:alert('完善中...');" class="file_down">大赛评审手册</a>
+                        </p>
+                    </div>
+                    <div class="cr_r">
+                        <p class="cr_title cr_title6">奖项设置</p>
+                        <p class="cr_det">{$match_prize}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--  schedule arrangement  -->
+    <div class="sche_arrange">
+        <div class="sect_title container tr sche_arrange_title"></div>
+        <div class="container sche_arrange_sect">
+            <ul>
+                <li>
+                    <div class="cn_top">
+                        <span class="cn_year fsize18">初赛</span>
+                        <span class="cn_date">3/25-5/10</span>
+                    </div>
+                    <div class="cn_bot">
+                        <p class="sa_explain fsize14">校自行组织,形式不限，参赛选手需提交报名表（附件2）。要求：每校至少选拔1名优秀选手参加复赛；在校生为8000人以上的高校，需选拔3名以上优秀选手参加复赛。
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="cn_top">
+                        <span class="cn_year fsize18">复赛</span>
+                        <span class="cn_date">5/11-5/31</span>
+                    </div>
+                    <div class="cn_bot">
+                        <p class="sa_explain fsize14">参赛内容包括“教案、教学课件和教学视频”三部分。参赛选手需于5月10日前将三部分材料传至平台。
+
+                    </div>
+                </li>
+                <li>
+                    <div class="cn_top">
+                        <span class="cn_year fsize18">决赛</span>
+                        <span class="cn_date">6/11-6/30</span>
+                    </div>
+                    <div class="cn_bot">
+                        <p class="sa_explain fsize14">参赛内容同复赛，对复赛胜出选手的参赛材料进行新一轮评选。参赛材料无需再次提交。
+                        </p>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <!--  introduce  -->
+
+
+    <!--  wonderful review  -->
+
+
+	<!--  participating institutions  -->
+
+
+    <!--  foot  -->
+    {include file="common/footer" /}
+
+</body>
+</html>

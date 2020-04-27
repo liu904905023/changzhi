@@ -1,0 +1,770 @@
+/*modal 字体样式*/
+.project-modal-text{
+    font-size:14px;
+    color:#808080;
+    padding: 0px;
+    padding-bottom:15px;
+}
+/*模态框信息*/
+.project-modal-info{
+    padding: 18px 33px 0 60px;
+}
+/*表单外div*/
+.edu-modal-body{
+    padding:0px;
+}
+/*确认框提示*/
+.modal-confirm{
+    padding-top: 10px;
+}
+.project-modal-del{
+    margin-top:10px;
+    font-size:16px;
+    margin-bottom: 10px;
+}
+/*表单样式*/
+/* .project-modal{
+    height:480px;
+    overflow-y: scroll;
+    -ms-overflow-y: scroll;
+} */
+/*文字标签*/
+.team-form-modal{
+   font-weight:normal;
+   color: #808080 !important;
+}
+.has-error .team-form-modal{
+   font-weight:normal;
+   color:#808080;
+}
+/*修改密码*/
+.form-modal-pass{
+  padding-right:10px;
+    width:28%;
+}
+/*form表单中的按钮*/
+.form-modal-btn{
+    margin-top:0px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.modal-btn-info-save{
+    float: left;
+    color:#ffffff;
+    font-size: 14px;
+    padding:9px 0px;
+    width:120px;
+}
+.modal-btn-info-cancel{
+    float: left;
+    font-size: 14px;
+    padding:9px 0px;
+    width:120px;
+    color:#4477ed;
+    background: #ffffff;
+    border:1px solid #4477ed;
+    margin-left: 30px;
+    border-radius:4px;
+}
+.modal-btn-info-cancel:hover{
+	background: #ffffff;
+	color:#4477ed;
+	 border:1px solid #4477ed;
+}
+.modal-btn-info-cancel:active{
+	background: #ffffff;
+	color:#4477ed;
+	 border:1px solid #4477ed;
+}
+/*保存按钮*/
+.modal-btn-save{
+    color:#ffffff;
+    font-size: 14px;
+    padding:9px 45px;
+    margin-right:16px;
+    margin-left:45px;
+}
+/*取消按钮*/
+.modal-btn-cancel{
+    font-size: 14px;
+    padding:9px 45px;
+    color:#4477ed;
+    background: #ffffff;
+    border:1px solid #4477ed;
+    margin-left:16px;
+}
+.modal-btn-cancel:hover{
+	background: #ffffff;
+	color:#4477ed;
+    border:1px solid #4477ed;
+}
+.modal-btn-cancel:active{
+	background: #ffffff;
+	color:#4477ed;
+    border:1px solid #4477ed;
+}
+/*logo上传按钮*/
+.form-logo-btn{
+    margin-top:25px;
+    display:block;
+    margin-bottom: 15px;
+    background: #ffffff;
+    color:#4477ed;
+    border:1px solid #4477ed;
+
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 12px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.form-logo-btn:link{
+	background: #ffffff;
+	color:#4477ed;
+}
+.form-logo-btn:visited{
+	background: #ffffff;
+	color:#4477ed;
+}
+.form-logo-btn:hover{
+	background: #ffffff;
+	color:#4477ed;
+}
+.form-logo-btn:active{
+	background: #ffffff;
+	color:#4477ed;
+}
+
+/*logo*/
+.form-modal-logo{
+    padding:0px;
+    float: left;
+    width:120px;
+    height:120px;
+    border-radius: 120px;
+    margin-right:18px;
+}
+/*logo外的整体div*/
+.modal-logo{
+    margin:0px;
+    padding:0px;
+    margin-bottom: 10px;
+}
+/*上传logo的要求*/
+.form-logo-text{
+    float: left;
+    font-size:12px;
+    display: inline-block;
+    margin-left: 18px;
+    width:144px;
+    height:120px;
+    text-align: left;
+}
+/*问号*/
+.project-modal-question{
+    background: url(../icon/question-mark.svg) center center no-repeat #ffffff ;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top:-23px;
+    left:33px;
+}
+/* 奖章 */
+.project-modal-medal{
+    background: url(../icon/medal-pic.svg) center center no-repeat #ffffff ;
+    background-size:65%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top:-23px;
+    left:65px;
+}
+/*人图标*/
+.project-modal-people{
+    z-index:9999;
+    background: url(../icon/man-with-tie.svg) center center no-repeat #ffffff ;
+    background-size: 50%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:58px;
+}
+/*金钱*/
+.project-modal-money{
+    z-index:9999;
+    background: url(../icon/yen-symbol.svg) center center no-repeat #ffffff ;
+    background-size: 50%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:58px;
+}
+/*专利图标*/
+.project-modal-patent{
+    z-index:9999;
+    background: url(../icon/diploma.svg) center center no-repeat #ffffff ;
+    background-size: 50%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:58px;
+}
+/*教师图标*/
+.project-modal-teacher{
+    z-index:9999;
+    background: url(../icon/teacher-at-the-blackboard.svg) center center no-repeat #ffffff ;
+    background-size: 60%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:58px;
+}
+/*编辑图标*/
+.project-modal-edit{
+    z-index:9999;
+    background: url(../icon/user.svg) center center no-repeat #ffffff ;
+    background-size: 60%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:58px;
+}
+/*锁图标*/
+.project-modal-lock{
+    z-index:9999;
+    background: url(../icon/padlock.svg) center center no-repeat #ffffff ;
+    background-size: 60%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:33px;
+}
+/*时钟图标*/
+.project-modal-clock{
+    z-index:9999;
+    background: url(../icon/clock-circula.svg) center center no-repeat #ffffff ;
+    background-size: 60%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:33px;
+}
+
+/*评委图标*/
+.project-modal-rater{
+    z-index:9999;
+    background: url(../icon/rater.svg) center center no-repeat #ffffff ;
+    background-size: 60%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:33px;
+}
+/* 加号*/
+.project-modal-pluss{
+    z-index:9999;
+    background: url(../icon/plus-blue.svg) center center no-repeat #ffffff ;
+    background-size: 60%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:33px;
+}
+
+/* 编辑*/
+.project-modal-edits{
+    z-index:9999;
+    background: url(../icon/edit-blue.svg) center center no-repeat #ffffff ;
+    background-size: 60%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:33px;
+}
+
+/* 成功*/
+.project-modal-success{
+    z-index:9999;
+    background: url(../icon/right.png) center center no-repeat #ffffff ;
+    background-size: 100%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:33px;
+}
+
+/*失败*/
+.project-modal-fail{
+    z-index:9999;
+    background: url(../icon/wrong.svg) center center no-repeat #ffffff ;
+    background-size: 60%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:33px;
+}
+
+/*提示*/
+.project-modal-prompt{
+    z-index:9999;
+    background: url(../icon/attention-sign-outline.svg) center center no-repeat #ffffff ;
+    background-size: 60%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:33px;
+}
+/* 提示2 */
+.project-modal-prompt2{
+    z-index:9999;
+    background: url(../icon/attention.svg) center center no-repeat #ffffff ;
+    background-size: 60%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:33px;
+}
+
+/* 羽毛笔 */
+.project-modal-draw{
+    z-index:9999;
+    background: url(../icon/quill-drawing-a-line.svg) center center no-repeat #ffffff ;
+    background-size: 60%;
+    text-align: center;
+    color:#1446a0;
+    display:inline-block;
+    position:absolute;
+    width:43px;
+    height:43px;
+    border:1px solid #dedede;
+    border-radius:43px;
+    top: -23px;
+    left:33px;
+}
+
+/*字体提示颜色*/
+.project-modal-red{
+    font-size: 12px;
+    color:#e57372;
+    text-indent: 13px;
+    margin-bottom: 5px;
+}
+.form-modal-small{
+    position:relative;
+    left:-130px;
+}
+/*团队信息宽度*/
+.form-modal-team{
+    width: 72.666667%;
+}
+/*form表单modal*/
+.form-modal{
+    margin:0px;
+    padding:0px;
+    padding-top: 30px;
+}
+.form-div{
+	 margin: 0px;
+    padding: 0px;
+    margin-right:0px;
+    margin-left: 0px;
+}
+/*模态框的div*/
+.form-modal-div{
+    margin: 0px;
+    padding: 0px;
+    height:65px;
+    margin-right:0px;
+    margin-left: 0px;
+}
+.form-horizontal .form-group {
+    margin-left:0px;
+    margin-right:0px;
+}
+/*模态框的输入框做内边距*/
+.form-modal-input{
+    padding-left:10px;
+}
+.form-modal-select{
+    color:#999999;
+}
+/*模态框*/
+.project-modal-input{
+    font-size: 14px;
+    height:36px;
+    background: #fcfcfc !important;
+    border-radius: 0px;
+    outline: none;
+    border:none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: none;
+    border-bottom: 1px solid #666666;
+    border-color:#666666;
+}
+.project-modal-input input:focus {
+    background: #fcfcfc;
+    border-radius: 0px;
+    outline: none;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: none;
+    border-bottom: 1px solid #4477ed;
+    border-color:#666666;
+}
+.has-error .project-modal-input{
+    border-color:#666666;
+}
+.has-success .project-modal-input{
+	border-color:#666666;
+}
+.has-error .project-modal-input:focus{
+    border-color:#666666;
+}
+.has-success .project-modal-input:focus{
+	border-color:#666666;
+}
+ .project-info-input{
+    padding:0px;
+    font-size: 14px;
+    height:28px;
+    background: #f2f2f2;
+    border-radius: 0px;
+    outline: none;
+    border:none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: none;
+    border-bottom: 1px solid #666666;
+}
+.project-info-input input:focus {
+    padding:0px;
+    background: #f2f2f2;
+    border-radius: 0px;
+    outline: none;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: none;
+    border-bottom: 1px solid #4477ed;
+}
+.student-info{
+    width:360px;
+    margin:0px auto;
+}
+.student-info-red{
+    font-size: 12px;
+    color:#e57372 !important;
+    text-indent: 0px;
+    margin-bottom: 4px;
+    width: 215px;
+}
+.student-info-div{
+    margin:0px;
+    padding:0px;
+}
+/*学生信息按钮*/
+.student-info-btn{
+ margin-top:10px;
+    font-size: 12px;
+}
+/*学生保存信息按钮*/
+.student-info-btn-save{
+    padding:5px 26px;
+    margin-left: 130px;
+}
+/*学生取消信息按钮*/
+.student-info-btn-cancel{
+    padding:5px 26px;
+    color:#4477ed;
+    background: #ffffff;
+    border:1px solid #4477ed;
+    margin-left: 24px;
+}
+.modal-pass-save{
+    color: #ffffff;
+    font-size: 14px;
+    padding: 7px 40px;
+    margin-left:78px;
+}
+.modal-pass-cancel{
+    font-size: 14px;
+    padding: 7px 40px;
+    color: #4477ed;
+    background: #ffffff;
+    border: 1px solid #4477ed;
+    margin-left: 16px;
+}
+.not-border{
+	border-bottom:none;
+}
+.project-modal-input.not-border{
+	white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.modal-title-defined{
+	font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+}
+.modal-header-defined{
+	    padding: 20px;
+	    background: -webkit-linear-gradient(left, #198fff , #4b02ab);
+	    background: -o-linear-gradient(right, #198fff, #4b02ab);
+	    background: -moz-linear-gradient(right, #198fff, #4b02ab); /* Firefox 3.6 - 15 */
+	     background: linear-gradient(to right, #198fff , #4b02ab); 
+	     FILTER:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#198fff,endColorStr=#4b02ab); /*IE 6 7 8*/
+}
+.close-defined{
+	position:absolute;
+	top:5px;
+	right:18px;
+	font-size:36px;
+	color:#b5bebe;
+}
+.close-defined:hover{
+	color:#b5bebe;
+}
+.modal-pass{
+	width:420px;
+}
+.invest-input{
+	position:relative;
+}
+.unit{
+	position:absolute;
+	top:10px;
+	right:25px;
+	font-size:14px;
+	display:inline-block;
+}
+.award-list{
+	padding:0px;
+	margin:0px 65px;
+	list-style:none;
+}
+.award-list:not(:last-child){
+	border-bottom:1px solid #999999;
+}
+.award-list li{
+	display:inline-block;
+	vertical-align:top;
+	text-align:left;
+	height:60px;
+	line-height:60px;
+	width:32%;
+	padding-left:36px;
+}
+.award-list.last-list li{
+	width:49%;
+}
+.award-list li input{
+	vertical-align:middle;
+	margin:0px;
+}
+.award-list li label{
+	font-weight:normal;
+}
+.award-text{
+	vertical-align:middle;
+	display:inline-block;
+	font-size:14px;
+}
+.mtauto{
+	margin-top:10px;
+}
+.confirm-button{
+	       display: block;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 9px 0px;
+    width: 120px;
+    margin: 0px auto; 
+}
+.prompt-button{
+	  display: block;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 9px 0px;
+    width: 120px;
+    margin: 0px auto;
+}
+.has-error .form-control:focus,.has-success .form-control:focus,.form-control:focus{
+	/* border-color:#666; */
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	-o-box-shadow:none;
+	box-shadow:none;
+}
+
+.modal-fake{
+	display: none;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    background-color: rgba(0,0,0,.6);
+}
+
+.modal-fake.fade .modal-dialog {
+    -webkit-transform: translate(0, -25%);
+    -ms-transform: translate(0, -25%);
+    -o-transform: translate(0, -25%);
+    transform: translate(0, -25%);
+    -webkit-transition: -webkit-transform 0.3s ease-out;
+    -moz-transition: -moz-transform 0.3s ease-out;
+    -o-transition: -o-transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+}
+.modal-fake.in .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+
+#TC .modal-body {
+    background: url(../img/tencent-modal.png) no-repeat top center;
+    height: 245px;
+    padding: 0;
+}
+
+#TC .modal-body .closeTip {
+    margin-right: 10px;
+    font-size: 20px;
+}
+.add-member-tip{
+	margin:0 20px 10px 52px;
+    font-size: 12px;
+    color:#e15554;
+}
+.member-result{
+	margin:0 0 30px 52px;
+}
+.member-result .info{color:#4877ed;cursor:pointer;margin-left:10px;}
+.has-success .form-control,.has-error .form-control{box-shadow:none;}
+.member-result span{max-width:200px;display:inline-block;white-space: nowrap;overflow:hidden;text-overflow:ellipsis;}
+.member-result span + span{margin-left:20px;}
+.giveup{color:#4877ed;cursor:pointer;margin-top:10px;}
+.modal-confirm .form-modal{padding-top:0;}
+.member-result .special-error{
+	display:block;
+	max-width:inherit;
+	color:#e15554;
+	padding-left:24px;
+	height:20px;
+	line-height:20px;
+	background:url(../img/mobile_warning.png) no-repeat;
+	background-size:18px 18px;
+}
+.modal-confirm.center{
+    padding-left: 80px;
+}

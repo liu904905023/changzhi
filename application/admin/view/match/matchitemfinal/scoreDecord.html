@@ -1,0 +1,33 @@
+<div id="edit-form" class="form-horizontal">
+
+    {if $list != null}
+    <div class="form-group">
+        <div class="col-xs-12 col-sm-8">
+            <table border="1px solid #000" style="width: 750px;">
+                <tr style="background-color: #eee">
+                    <td align="center">专家</td>
+                    <td align="center">评分</td>
+                    <td align="center">评分详情</td>
+                    <td align="center">评语</td>
+                </tr>
+                {foreach name='list' item='vo'}
+                <tr {if condition="$key eq 0 || $key eq count($list)-1"}style='color:red'{/if}>
+                    <td align="center">{$vo.nickname}</td>
+                    <td align="center">{$vo.score}分</td>
+                    <td align="center">{$vo.score_detail}</td>
+                    <td align="center">{$vo.comment}</td>
+                </tr>
+                {/foreach}
+            </table>
+            去掉一个最高分，去掉一个最低分，平均分：{$final_score}分
+        </div>
+    </div>
+    {/if}
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="button" id="closeButton" class="btn btn-success btn-embossed">{:__('关闭')}</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="audit">
+
+    <input type="hidden" name="audit_id" id="audit_id" value="{$row.id}" />
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Username')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.username}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Email')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.email}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Mobile')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.mobile}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Id_card')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.id_card}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('City')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.city}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Political_status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.political_status}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Gender')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{if $row.gender == 0}男{elseif $row.gender == 1}女{/if}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('College')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.college}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('School')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.school_name}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Major')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.major}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Class')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.class}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Birthday')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.birthday}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('AuditStatus')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{if $row.audit_status == '0'}待审核{elseif $row.audit_status == '1'}通过{elseif $row.audit_status == '2'}拒绝{/if}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="button" id="success" class="btn btn-success btn-embossed btn-audit">{:__('Audited')}</button>
+            <button type="button" id="failed" class="btn btn-default btn-embossed btn-audit">{:__('AuditFailed')}</button>
+        </div>
+    </div>
+</form>

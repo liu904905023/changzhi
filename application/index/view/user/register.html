@@ -1,0 +1,200 @@
+<div id="content-container" class="container">
+    <div class="user-section login-section">
+        <div class="login-main" style="width: 500px;margin: 0 auto;">
+            <form name="form1" id="register-form" class="form-vertical" method="POST" action="">
+                <input type="hidden" name="invite_user_id" value="0" />
+                <input type="hidden" name="url" value="{$url}" />
+                {:token()}
+                <div class="form-group">
+                    <label class="control-label">{:__('Sno')}<span class="red">*</span></label>
+                    <div class="controls">
+                        <input type="text" id="username" name="username" maxlength="30" data-rule="required;username" class="form-control input-lg" placeholder="{:__('Sno')}">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{:__('Password')}<span class="red">*</span></label>
+                    <div class="controls">
+                        <input type="password" id="password" name="password" maxlength="30" data-rule="required;password" class="form-control input-lg" placeholder="{:__('Password must be 6 to 30 characters')}">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">姓名<span class="red">*</span></label>
+                    <div class="controls">
+                        <input type="text" id="nickname" name="nickname"  maxlength="4" data-rule="required;username" class="form-control input-lg" placeholder="姓名必须2-4个字符">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{:__('College')}<span class="red">*</span></label>
+                    <div class="controls">
+                        <select id="school" name="school" class="form-control">
+                            {foreach name="schoolNameList" item="vo"}
+                            <option value="{$vo.school_id}" >{$vo.school_name}</option>
+                            {/foreach}
+                        </select>
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <!--<div class="form-group">-->
+                    <!--<label class="control-label">{:__('College')}<span class="red">*</span></label>-->
+                    <!--<div class="controls">-->
+                        <!--<input type="text" id="college" name="college" class="form-control input-lg" placeholder="{:__('College')}">-->
+                        <!--<p class="help-block"></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+                <div class="form-group">
+                    <label class="control-label">{:__('Gender')}</label>
+                    <div class="controls">
+                        <input type="radio" name="gender" value="0" checked="checked" /> 男
+                        <input type="radio" name="gender" value="1" /> 女
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <!--<div class="form-group">-->
+                    <!--<label class="control-label">{:__('IdCard')}</label>-->
+                    <!--<div class="controls">-->
+                        <!--<input type="text" id="idCard" name="idCard" class="form-control input-lg" placeholder="身份证号码">-->
+                        <!--<p class="help-block"></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="form-group">
+                    <label class="control-label">{:__('Mobile')}<span class="red">*</span></label>
+                    <div class="controls">
+                        <input type="text" id="mobile" name="mobile" data-rule="required;mobile" class="form-control input-lg" placeholder="{:__('Mobile')}">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label required">{:__('Email')}<span class="red">*</span><span class="text-success"></span></label>
+                    <div class="controls">
+                        <input type="text" name="email" id="email" data-rule="required;email" class="form-control input-lg" placeholder="{:__('Email')}">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{:__('Captcha')}<span class="red">*</span></label>
+                    <div class="controls">
+                        <div class="input-group input-group-lg">
+                            <input id="captcha" type="text" name="captcha" class="form-control" placeholder="{:__('Captcha')}" data-rule="required;length(4)" style="border-radius: 0;" />
+                            <span class="input-group-addon" style="padding:0;border:none;">
+                                <img src="{:captcha_src()}" width="140" height="42" onclick="this.src = '{:captcha_src()}?r=' + Math.random();"/>
+                            </span>
+                        </div>
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" onclick="beforeSubmit()" class="btn btn-primary btn-lg btn-block">{:__('Sign up')}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 通用信息提示 -->
+<div class="modal fade" tabindex="-1" role="dialog" id="resultTip" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header modal-header-defined ">
+                <button type="button" class="close close-defined" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title modal-title-defined text-center" id="resultTitle">温馨提示</h4>
+            </div>
+            <div class="modal-body project-modal-text">
+                <span class="project-modal-prompt" id="resultIcon"></span>
+                <div class="project-modal-info">
+                    <p class="project-modal-del" id="resultMessage">
+                        已成功发送邀请，请通知你的团队成员登录大创网→进入个人中心→点击“我的消息”，接受你的邀请。
+                    </p>
+                    <div class="form-group clearfix modal-confirm" style="padding-left: 70px;">
+                        <button class="btn btn-default modal-btn-info-save" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    /**
+     * 注册前验证
+     */
+    function beforeSubmit(){
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var nickname = $("#nickname").val();
+        var college = $("#college").val();
+        var mobile = $("#mobile").val();
+        var email = $("#email").val();
+        var captcha = $("#captcha").val();
+        if(username == ''){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("用户名不能为空");
+            return false;
+        }
+        if(username.length < 3){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("用户名不能少于3个字符");
+            return false;
+        }
+        if(password == ''){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("密码不能为空");
+            return false;
+        }
+        if(password.length < 6){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("密码不能少于6个字符");
+            return false;
+        }
+        if(nickname == ''){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("姓名不能为空");
+            return false;
+        }
+        if(nickname.length < 2){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("姓名不能少于2个字符");
+            return false;
+        }
+        if(college == ''){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("学院不能为空");
+            return false;
+        }
+        if(mobile == ''){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("手机号不能为空");
+            return false;
+        }
+        //手机号验证正则
+        var myreg = /^[1-9]\d*$/;
+        if(mobile.length != 11 || !myreg.test(mobile)){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("请输入有效的手机号码");
+            return false;
+        }
+        if(email == ''){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("邮箱不能为空");
+            return false;
+        }
+        //邮箱正则
+        var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+        if(!reg.test(email)){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("请输入有效的邮箱");
+            return false;
+        }
+        if(captcha == ''){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("验证码不能为空");
+            return false;
+        }
+        $("#register-form").submit();
+    }
+</script>

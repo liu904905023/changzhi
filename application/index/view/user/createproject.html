@@ -1,0 +1,936 @@
+<script src="__CDN__/assets/js/frontend/jquery.form.js"></script>
+<!--  content  -->
+<div class="content">
+    <!--主体内容-->
+    <div class="container">
+        <h2 class="h2-title">
+            {if $project_id == ''}新建参赛作品{else}编辑参赛作品{/if}
+        </h2>
+        <form class="form-horizontal form-project" id="mainForm" role="form" action="" method="post" enctype="multipart/form-data">
+            <a href="#topError" class="hidden">aa</a>
+            <div class="project-block wbg">
+                <div>
+                    <h2 class="h2-title">基本信息</h2>
+                    <div class="form-group">
+                        <div class="group-title">
+                            <span class="star">*</span>
+                            <span class="title">比赛</span>
+                        </div>
+                        <div class="group-content clearfix">
+                            <select name="match_id" data-rule="required" class="form-control">
+                                {foreach name="matchList" item="vo"}
+                                <option value="{$vo.match_id}" {if $row.match_id == $vo.match_id}selected="selected"{/if}>{$vo.match_name}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="group-title">
+                            <span class="star">*</span>
+                            <span class="title">赛道</span>
+                        </div>
+                        <div class="group-content clearfix">
+                            <select name="track_id" data-rule="required" class="form-control">
+                                {foreach name="trackList" item="vo"}
+                                <option value="{$vo.track_id}" {if $row.track_id == $vo.track_id}selected="selected"{/if}>{$vo.track_name}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<div class="group-title">-->
+                            <!--<span class="star">*</span>-->
+                            <!--<span class="title">组别</span>-->
+                        <!--</div>-->
+                        <!--<div class="group-content clearfix">-->
+                            <!--<select name="group_id" data-rule="required" class="form-control">-->
+                                <!--{foreach name="groupList" item="vo"}-->
+                                <!--<option value="{$vo.group_id}" {if $row.group_id == $vo.group_id}selected="selected"{/if}>{$vo.track_name."-".$vo.group_name}</option>-->
+                                <!--{/foreach}-->
+                            <!--</select>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <div class="form-group">
+                        <div class="group-title">
+                            <span class="star">*</span>
+                            <span class="title">参赛作品名称</span>
+                        </div>
+                        <div class="group-content">
+                            <input type="text" class="form-control color-readonly" maxlength="50" name='name' placeholder="简洁清晰，不多于50字。" id="item_name" value="{$row.item_name}" />
+                            <input type="hidden" name='id' id="projectId" value="{if isset($project_id)}{$project_id}{/if}" />
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                    </div>
+                </div>
+            </div>
+            <div class="project-block wbg">
+                <div>
+                    <h2 class="h2-title">参赛作品介绍</h2>
+                    <div class="form-group textarea-group">
+                        <div class="group-title">
+                            <span class="star">*</span>
+                            <span class="title">参赛作品概述</span>
+                        </div>
+                        <div class="group-content textarea-box">
+                            <div class="tip hidden">可拆分为产品描述、用户群体、参赛作品愿景、竞争对手等方面详细描述，不少于100字，但不超过1000字。</div>
+                            <textarea class="form-control intro-text" id="synopsis" name="item_desc" maxlength="1000" placeholder="可拆分为产品描述、用户群体、参赛作品愿景、竞争对手等方面详细描述，不少于100字，但不超过1000字。">{$row.item_desc}</textarea>
+                            <div class="text-count"><span class="count">0</span>/<span>1000</span></div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group textarea-group">
+                        <div class="group-title">
+                            <span class="star">*</span>
+                            <span class="title">教师简介</span>
+                        </div>
+                        <div class="group-content textarea-box">
+                            <div class="tip tip2 hidden">一句话介绍自己，字数要求不超过50字。</div>
+                            <textarea id="founder_desc" class="form-control intro-text intro-text2" name="founder_desc" maxlength="50" placeholder="一句话介绍自己，字数要求不超过50字">{$row.founder_desc}</textarea>
+                            <div class="text-count"><span class="count">0</span>/<span>50</span></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="project-block wbg">
+                <h2 class="h2-title">认证信息</h2>
+
+                <div>
+                    <!-- 项目计划书 -->
+                    <div class="form-group file-box">
+                        <div class="group-title">
+                            <span class="star">*</span>
+                            <span class="title">教案</span>
+                        </div>
+                        <div class="group-content">
+
+                            <!--<input type='file' id="physicalFileId" name='physicalFile'>-->
+
+                            <input type="hidden" id="fileUrl" name="fileUrl" value="{$row.plan_paper_file}" />
+                            <button id="pickfiles1" class="browse_button file-input pull-left" data-upload-url="upload.php" data-extensions="Doc,Docx"
+                                    data-max-size="20mb" >点击上传 </button>
+                            <div class="process pull-left">
+                                {if $row.plan_paper_file != ''}
+                                <span id="physicalDown">
+                                <a style="color: blue" class="filename" href="{$row.plan_paper_file}">{$row.item_name}-教案.{$planPaperSuffix}</a></span>
+                                {else/}
+                                <a class="filename" style="padding-left: 8px; color: blue" href=""></a>
+                                {/if}
+                            </div>
+
+                            <div style="clear:both;"></div>
+                            <p >
+                                格式为doc、docx，不超过20M，文件数量限一个。<span id="ieTip" class="hidden">（IE10浏览器请双击选择文件。）</span>
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="form-group file-box">
+                        <div class="group-title">
+                            <span class="star">*</span>
+                            <span class="title">教学课件</span>
+                        </div>
+                        <div class="group-content">
+                            <input type="hidden" id='otherUrl' name="otherUrl" value="{$row.other_file}"/>
+                            <button id="pickfiles2" class="browse_button file-input pull-left" data-upload-url="upload.php" data-extensions="ppt,pptx"
+                                    data-max-size="20mb" >点击上传
+                            </button>
+                            <div class="process pull-left">
+                                {if $row.other_file != ''}
+                                <span>
+                                <a style="color: blue" class="filename" href="{$row.other_file}">{$row.item_name}-教学课件.{$otherFileSuffix}</a></span>
+                                {else/}
+                                <a class="filename" style="padding-left: 8px; color: blue" href=""></a>
+                                {/if}
+                            </div>
+                            <div style="clear:both;"></div>
+
+                            <p>
+                                格式为ppt、pptx，不超过20M，文件数量限一个。
+                            </p>
+                        </div>
+
+                    </div>
+                    <!-- 一分钟展示视频 -->
+                    <div class="form-group file-box">
+                        <div class="group-title">
+                            <span class="star">*</span>
+                            <span class="title">教学视频</span>
+                        </div>
+                        <div class="group-content">
+                            <input type="hidden" id="vedioUrl" name="vedioUrl" value="{$row.vedio_file}"/>
+
+                            <button id="pickfiles3" class="browse_button file-input pull-left" data-upload-url="upload.php" data-extensions="mpeg,mp4"
+                                    data-max-size="2048mb" >点击上传
+                            </button>
+                            <div class="process pull-left">
+                                {if $row.vedio_file != ''}
+                                <span >
+                                <a style="color: blue" class="filename" href="{$row.vedio_file}">{$row.item_name}-教学视频.{$vedioFileSuffix}</a></span>
+                                {else/}
+                                <a class="filename" style="padding-left: 8px; color: blue" href=""></a>
+                                {/if}
+                            </div>
+                            <div style="clear:both;"></div>
+                            <p>
+                            格式为mp4或mpeg，不超过2048M，视频数量限一个。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- 其他佐证材料 -->
+
+                </div>
+            </div>
+
+            <div>
+
+                <button type="submit" class="hide" id="hiddenSub"></button>
+                <div class="form-group text-center">
+                    <button type="button" onclick="addItem()" class="btn btn-primary subform-inline">保存</button>
+                    <button type="button" id="cancelForm" onclick="history.go(-1);" class="btn btn-default subform-inline">取消</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <!-- 提交成功弹窗 -->
+
+    <!-- 提示团队成员不能删除模态框 -->
+    <div class="modal fade bs-del-modal-sm" tabindex="-1" role="dialog" id="nodelet" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header modal-header-defined ">
+                    <button type="button" class="close close-defined" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title modal-title-defined text-center">无法删除团队成员</h4>
+                </div>
+                <div class="modal-body project-modal-text">
+                    <span class="project-modal-prompt"></span>
+                    <div class="project-modal-info">
+                        <p class="project-modal-del">
+                            参赛项目的已注册团队成员不能少于3人<br>
+                        </p>
+                        <div class="form-group clearfix modal-confirm center">
+                            <button class="btn btn-default modal-btn-info-save" data-dismiss="modal">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 提示评审已勾选不能删除 -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="joined" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header modal-header-defined ">
+                    <button type="button" class="close close-defined" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title modal-title-defined text-center">无法删除团队成员</h4>
+                </div>
+                <div class="modal-body project-modal-text">
+                    <span class="project-modal-prompt"></span>
+                    <div class="project-modal-info">
+                        <p class="project-modal-del">
+                            该成员为现场答辩成员，如要删除请先取消选择。<br>
+                        </p>
+                        <div class="form-group clearfix modal-confirm center">
+                            <button class="btn btn-default modal-btn-info-save" data-dismiss="modal">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 通用信息提示 -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="resultTip" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header modal-header-defined ">
+                    <button type="button" class="close close-defined" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title modal-title-defined text-center" id="resultTitle">温馨提示</h4>
+                </div>
+                <div class="modal-body project-modal-text">
+                    <span class="project-modal-prompt" id="resultIcon"></span>
+                    <div class="project-modal-info">
+                        <p class="project-modal-del" id="resultMessage">
+                            已成功发送邀请，请通知你的团队成员登录大创网→进入个人中心→点击“我的消息”，接受你的邀请。
+                        </p>
+                        <div class="form-group clearfix modal-confirm" style="padding-left: 70px;">
+                            <button class="btn btn-default modal-btn-info-save" data-dismiss="modal">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 删除指导老师 -->
+    <div class="modal fade bs-team-modal-sm" id="delete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header modal-header-defined">
+                    <button type="button" class="close close-defined" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title text-center modal-title-defined" id="mySmallModalLabel">删除团队成员</h4>
+                </div>
+                <div class="modal-body project-modal-text">
+                    <span class="project-modal-question"></span>
+                    <div class="project-modal-info">
+                        <p class="project-modal-del del-html">确认删除 王小明 的团队成员身份 ?</p>
+                        <div class="form-group clearfix modal-confirm">
+                            <form role="form" class="delete form-horizontal form-modal project-modal-text" method="post">
+                                <input type="hidden" name="projectId" value="8a80808b6a1fc621016a206e130a1949">
+                                <button class="btn btn-default modal-btn-info-save bg-c4877ed" type="submit">删除</button>
+                                <button class="btn btn-success" onclick="window.location.href='{:url(\'index/user/index\')}'" style="height: 48px;width: 180px;font-size: 16px;">返回</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="__CDN__/assets/js/frontend/main.js"></script>
+
+<script>
+    var num = 0;
+    var teacherNum = 0;
+    var patentNum = 0;
+
+    $(document).ready(function(){
+        //如果 项目id不为空 则展示下方表单
+       if('{$project_id}' != ''){
+            $("#afterForm").removeClass("hidden");
+       }
+        //id号 根据数据条数增加
+        var memberNum = '{$memberNum}';
+        num = num + memberNum-1;
+        var teaNum = '{$teacherNum}';
+        teacherNum = teacherNum + teaNum-1;
+        var patNum = '{$patentNum}';
+        patentNum = patentNum + patNum-1;
+    });
+    /*
+	 * logo上传
+	 */
+    function upload_logo(id) {
+        FU.ajaxFileUpload({
+            url: "{:url('index/user/upload')}",
+            fileElementId: id,  //文件上传域的ID
+            dataType: 'json',
+            data:{name:'logo_avatar'},
+            type: 'post',   //当要提交自定义参数时，这个参数要设置成post
+            secureuri: false,       //是否需要安全协议，一般设置为false
+            contentType: false, //必须false才会避开jQuery对 formdata 的默认处理 XMLHttpRequest会对 formdata 进行正确的处理
+            processData: false, //必须false才会自动加上正确的Content-Type
+            success: function (result) {
+                var photo_url = result['data']['url'];
+                $("#imageHead").attr("src","__CDN__"+photo_url);
+                $("#userPic").attr("src","__CDN__"+photo_url);
+                $("#photoUrl").val(photo_url);
+            }
+        })
+    }
+
+    /*
+     * 项目计划书验证
+     */
+//    $(document).off('change','#physicalFileId').on('change','#physicalFileId',function(e){
+//        var filemaxsize = 20 * 1024;
+//        var target = $(e.target);
+//        if (target[0].files.length == 0) {
+//            $('#errorPhysical').html("error!").removeClass("hide");
+//        } else {
+//            var Size = target[0].files[0].size / 1024;
+//            var fileName = target[0].files[0].name;
+//            var fileExt = (/[.]/.exec(fileName)) ? /[^.]+$/.exec(fileName.toLowerCase()) : '';
+//            if (!fileExt[0].match(/pdf|PDF|doc|docx|DOC|DOCX$/)) {
+//                //$('#checkimg').next().html('请选择正确的图片!').show();
+//                $('#errorPhysical').html("请选择正确的文件!").removeClass("hide");
+//                $('#errorPhysical').next().css("display", "none");
+//                return false;
+//            } else if (Size > filemaxsize) {
+//                $('#errorPhysical').html("文件过大，请重新选择!").removeClass("hide");
+//                $('#errorPhysical').next().css("display", "none");
+//                return false;
+//            } else {
+//                upload_file(this.id);
+//                $("#physicalDown").addClass("hidden");
+//                var texts = target[0].files[0].name;
+//                $('#errorPhysical').html(texts).removeClass("hide");
+//            }
+//        }
+//    });
+    /*
+     * 上传教学计划书
+     */
+    function upload_file(id) {
+        FU.ajaxFileUpload({
+            url: "{:url('index/user/upload')}",
+            fileElementId: id,  //文件上传域的ID
+            dataType: 'json',
+            data:{name:'physicalFile'},
+            type: 'post',   //当要提交自定义参数时，这个参数要设置成post
+            secureuri: false,       //是否需要安全协议，一般设置为false
+            contentType: false, //必须false才会避开jQuery对 formdata 的默认处理 XMLHttpRequest会对 formdata 进行正确的处理
+            processData: false, //必须false才会自动加上正确的Content-Type
+            success: function (result) {
+                var file_url = "__CDN__"+result['data']['url'];
+                $("#fileUrl").val(file_url);
+                alert('上传成功');
+            }
+        })
+    }
+
+    /*
+     * 一分钟视频验证
+     */
+    $(document).off('change','#vedio_file').on('change','#vedio_file',function(e){
+        var filemaxsize = 1024 * 500;
+        var target = $(e.target);
+        if (target[0].files.length == 0) {
+            $('#errorVedio').html("error!").removeClass("hide");
+        } else {
+            var Size = target[0].files[0].size / 1024;
+            var fileName = target[0].files[0].name;
+            var fileExt = (/[.]/.exec(fileName)) ? /[^.]+$/.exec(fileName.toLowerCase()) : '';
+            if (!fileExt[0].match(/mp4|MP4|mpeg$/)) {
+                $('#errorVedio').html("请选择正确的文件!").removeClass("hide");
+                $('#errorVedio').next().css("display", "none");
+                return false;
+            } else if (Size > filemaxsize) {
+                $('#errorVedio').html("文件过大，请重新选择!").removeClass("hide");
+                $('#errorVedio').next().css("display", "none");
+                return false;
+            } else {
+                upload_vedio(this.id);
+                $("#vedioDown").addClass("hidden");
+                var texts = target[0].files[0].name;
+                $('#errorVedio').html(texts).removeClass("hide");
+            }
+        }
+    });
+
+    /*
+     * 上传一分钟展示视频
+     */
+    function upload_vedio(id) {
+        FU.ajaxFileUpload({
+            url: "{:url('index/user/upload')}",
+            fileElementId: id,  //文件上传域的ID
+            dataType: 'json',
+            data:{name:'vedio_file'},
+            type: 'post',   //当要提交自定义参数时，这个参数要设置成post
+            secureuri: false,       //是否需要安全协议，一般设置为false
+            contentType: false, //必须false才会避开jQuery对 formdata 的默认处理 XMLHttpRequest会对 formdata 进行正确的处理
+            processData: false, //必须false才会自动加上正确的Content-Type
+            success: function (result) {
+                var vedio_url = "__CDN__"+result['data']['url'];
+                $("#vedioUrl").val(vedio_url);
+                alert('上传成功');
+            }
+        })
+    }
+
+    /**
+     * 其他佐证材料验证
+     */
+    $(document).off('change','#other_file').on('change','#other_file',function(e){
+        var filemaxsize = 1024 * 20;
+        var target = $(e.target);
+        if (target[0].files.length == 0) {
+            $('#errorOther').html("error!").removeClass("hide");
+        } else {
+            var Size = target[0].files[0].size / 1024;
+            var fileName = target[0].files[0].name;
+            var fileExt = (/[.]/.exec(fileName)) ? /[^.]+$/.exec(fileName.toLowerCase()) : '';
+            if (!fileExt[0].match(/mp4|MP4|xls|XLS|xlsx|XLSX|doc|DOC|docx|DOCX|mp4|MP4|pdf|PDF|ppt|PPT|pptx|PPTX$/)) {
+                $('#errorOther').html("请选择正确的文件!").removeClass("hide");
+                $('#errorOther').next().css("display", "none");
+                return false;
+            } else if (Size > filemaxsize) {
+                $('#errorOther').html("文件过大，请重新选择!").removeClass("hide");
+                $('#errorOther').next().css("display", "none");
+                return false;
+            } else {
+                upload_other(this.id);
+                $("#otherDown").addClass("hidden");
+                var texts = target[0].files[0].name;
+                $('#errorOther').html(texts).removeClass("hide");
+            }
+        }
+    });
+
+    /*
+     * 上传其他佐证材料
+     */
+    function upload_other(id) {
+        FU.ajaxFileUpload({
+            url: "{:url('index/user/upload')}",
+            fileElementId: id,  //文件上传域的ID
+            dataType: 'json',
+            data:{name:'other_file'},
+            type: 'post',   //当要提交自定义参数时，这个参数要设置成post
+            secureuri: false,       //是否需要安全协议，一般设置为false
+            contentType: false, //必须false才会避开jQuery对 formdata 的默认处理 XMLHttpRequest会对 formdata 进行正确的处理
+            processData: false, //必须false才会自动加上正确的Content-Type
+            success: function (result) {
+                var vedio_url = "__CDN__"+result['data']['url'];
+                $("#otherUrl").val(vedio_url);
+                alert('上传成功');
+            }
+        })
+    }
+
+    /**
+     * 主表单的校验
+     */
+    function mainFormValidator(){
+        //基础信息
+        var photoUrl = $("#photoUrl").val();
+        var item_name = $("#item_name").val();
+        var city = $("#city").val();
+        var industryCode = $("#industryCode").val();
+        var synopsis = $("#synopsis").val();
+        var is_hightech = $("input:radio[name='is_hightech']:checked").val();
+        var founder_desc = $("#founder_desc").val();
+        var is_founder_lead = $("input:radio[name='is_founder_lead']:checked").val();
+        var is_together = $("input:radio[name='is_together']:checked").val();
+        //认证信息
+//        var progress = $("input:radio[name='progress']:checked").val();
+
+//        if(photoUrl.trim() == ""){
+//            $("#resultTip").modal("show");
+//            $("#resultTip").find(".project-modal-del").text("参赛作品logo不能为空！");
+//            return false;
+//        }
+        if(item_name.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("参赛作品名称不能为空！");
+            return false;
+        }
+//        if(city.trim() == ""){
+//            $("#resultTip").modal("show");
+//            $("#resultTip").find(".project-modal-del").text("所在地不能为空！");
+//            return false;
+//        }
+//        if(industryCode == null){
+//            $("#resultTip").modal("show");
+//            $("#resultTip").find(".project-modal-del").text("所属领域不能为空！");
+//            return false;
+//        }
+        if(synopsis.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("参赛作品概述不能为空！");
+            return false;
+        }
+        if(synopsis.length < 100){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("参赛作品概述不能少于100字！");
+            return false;
+        }
+        if(synopsis.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("参赛作品概述不能为空！");
+            return false;
+        }
+//        if(is_hightech == undefined){
+//            $("#resultTip").modal("show");
+//            $("#resultTip").find(".project-modal-del").text("高校科研成果转化不能为空！");
+//            return false;
+//        }
+        if(founder_desc.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("教师简介不能为空！");
+            return false;
+        }
+
+        var fileUrl = $("#fileUrl").val();
+        if(fileUrl.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("教案不能为空！");
+            return false;
+        }
+        var otherUrl = $("#otherUrl").val();
+        if(otherUrl.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("教学课件不能为空！");
+            return false;
+        }
+        var vedioUrl = $("#vedioUrl").val();
+        if(vedioUrl.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("教学视频不能为空！");
+            return false;
+        }
+//        if(secretStatus == undefined){
+//            $("#resultTip").modal("show");
+//            $("#resultTip").find(".project-modal-del").text("隐私设置不能为空！");
+//            return false;
+//        }
+
+        return true;
+    }
+
+    /**
+     * 添加参赛作品
+     */
+    function addItem(){
+        //校验
+        var result = mainFormValidator();
+        if(result == true){
+            $('#mainForm').ajaxSubmit( {
+                url : "__CDN__/index/user/saveProject",
+                success: function(data) {
+                    var item_id = data.item_id;
+                    if(data.flag=="success"){
+                        //隐藏域参赛作品id
+                        $("#item_id").val(item_id);
+                        $("#teacherItem").val(item_id);
+                        $("#patentItem").val(item_id);
+                        $("#resultTip").modal("show");
+                        $("#resultTip").find(".project-modal-del").text("添加参赛作品成功");
+                        //添加完成 显示下方表单
+                        $("#afterForm").removeClass("hidden");
+                    }else if(data.flag== "editSuccess"){
+                        //隐藏域参赛作品id
+                        $("#item_id").val(item_id);
+                        $("#teacherItem").val(item_id);
+                        $("#patentItem").val(item_id);
+                        $("#resultTip").modal("show");
+                        $("#resultTip").find(".project-modal-del").text("编辑参赛作品成功");
+                    } else {
+                        $("#resultTip").find(".project-modal-del").text(data.message);
+                        $("#resultTip").modal("show");
+
+                    }
+                }
+            });
+        }
+
+        return false;
+    }
+
+    /**
+     * 成员表单验证
+     */
+    function memberFormValidator() {
+        var memberName = $("#memberName").val();
+        var mobile = $("#mobile").val();
+        var memberCollege = $("#memberCollege").val();
+        var memberMajor = $("#memberMajor").val();
+        var memberGrade = $("#memberGrade").val();
+        var memberSno = $("#memberSno").val();
+
+        if(memberName.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("成员姓名不能为空！");
+            return false;
+        }
+        //手机号验证正则
+        var myreg = /^[1-9]\d*$/;
+        if(mobile.length != 11 || !myreg.test(mobile)){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("请输入有效的手机号码！");
+            return false;
+        }
+
+        if(memberMajor.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("成员专业不能为空！");
+            return false;
+        }
+        if(memberGrade.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("成员年级不能为空！");
+            return false;
+        }
+        if(memberSno.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("成员学号不能为空！");
+            return false;
+        }
+        return true;
+    }
+
+    //添加团队成员
+    $("#saveInfoEdit").on("click", function () {
+        var result = memberFormValidator();
+        if(result == true){
+            var memName = $("#memberName").val();
+            var college = $("#memberCollege").val();
+            var major = $("#memberMajor").val();
+            var grade = $("#memberGrade").val();
+            var education = $("#memberEdu").val();
+            var sno = $("#memberSno").val();
+            var phone = $("#mobile").val();
+            var school = $("#school").val();
+            var schoolName = $("#school option:selected").text();
+            var projectId = $("#projectId").val();
+            if(projectId == ''){
+                projectId = $("#item_id").val();
+            }
+            $.ajax({
+                type: "post",
+                url: "__CDN__/index/user/saveMemberInvite",
+                data: {
+                    projectId: projectId,
+                    college:college,
+                    major:major,
+                    grade:grade,
+                    education:education,
+                    sno:sno,
+                    phone:phone,
+                    memName:memName,
+                    school:school
+                },
+                success: function (data) {
+                    num++;
+                    //$("#team").collapse("hide");
+                    $("#resultTip").modal("show");
+                    if (data.flag == true) {
+                        $("#resultMessage").text("添加成功");
+                        $("#resultTitle").text("发送成功");
+                        $("#resultIcon").attr("class", "project-modal-success");
+                        /* $("#resultTip").on("hidden.bs.modal", function () {
+                         window.location.href = "/talentproject/edit/" + projectId;
+                         }); */
+                        var flag = true;
+                        $(".unconfirm").each(function(){
+                            console.log(memName,$(this).find("h4 span").text())
+                            if($(this).find("h4 span").text()==memName){
+                                flag = false;
+                            }
+                        });
+                        if(flag){
+                            var temp = '<tr id="memberTr'+num+'"><td align="center">'+memName+'</td><td align="center">成员</td><td align="center">'+schoolName+'</td><td align="center">'+major+'</td><td align="center">'+grade+'</td><td align="center">'+education+'</td><td align="center">'+sno+'</td><td align="center">'+phone+'</td><td align="center"><a href="javascript:void(0);" onclick="delMember('+data.member_id+',\'memberTr'+num+'\')" style="color: blue;">删除</a></td></tr>';
+                            $("#showMember").append(temp);
+                        }
+                        $('#team').find("input").val("");
+                        $(".member-result").html("");
+                        $("#team").find(".help-block").hide();
+                        $("#team").find(".form-group").removeClass("has-error");
+                    } else {
+                        $("#resultMessage").text(data.message);
+                        $("#resultTitle").text("发送失败");
+                        $("#resultIcon").attr("class", "project-modal-fail");
+                    }
+                },
+                error: function (data) {
+                    //$("#team").modal("hide");
+                    $("#resultTip").modal("show");
+                    $("#resultTip").find(".project-modal-del").text("发生异常，请稍后再试。");
+                    $("#resultTitle").text("发送失败");
+                    $("#resultIcon").attr("class", "project-modal-prompt");
+                }
+            });
+        }
+
+        return false;
+    });
+
+
+    /**
+     * 指导教师表单验证
+     */
+    function teacherFormValidator() {
+        var teacherName = $("#teacherName").val();
+        var teacherPhone = $("#teacherPhone").val();
+        var teacherEmail = $("#teacherEmail").val();
+        var teacherDepartment = $("#teacherDepartment").val();
+        var teacherJobTitle = $("#teacherJobTitle").val();
+
+        if(teacherName.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("导师姓名不能为空！");
+            return false;
+        }
+        var myreg = /^[1-9]\d*$/;
+        if(teacherPhone.length != 11 || !myreg.test(teacherPhone)){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("请输入有效的手机号码！");
+            return false;
+        }
+        if(teacherEmail.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("导师电子邮箱不能为空！");
+            return false;
+        }
+        if(teacherDepartment.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("导师所在部门不能为空！");
+            return false;
+        }
+        if(teacherJobTitle.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("导师职称不能为空！");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 添加指导教师
+     * @returns {boolean}
+     */
+    function addTeacher() {
+        var result = teacherFormValidator();
+        if(result == true){
+            $('#teacherForm').ajaxSubmit( {
+                url : "__CDN__/index/user/saveTeacher",
+                success: function(data) {
+                    if(data.flag=="success"){
+                        $("#resultTip").modal("show");
+                        $("#resultTip").find(".project-modal-del").text("添加教师成功");
+                        teacherNum++;
+                        var tr = '<tr id="teacherTr'+teacherNum+'"><input type="hidden" value="'+data.teacherId+'" /><td align="center">'+data.teacher_name+'</td><td align="center">成员</td><td align="center">'+data.schoolName+'</td><td align="center">'+data.department+'</td><td align="center">'+data.positional_title+'</td><td align="center">'+data.teacher_email+'</td><td align="center">'+data.teacher_mobile+'</td><td align="center"><a href="javascript:void(0);" onclick="delTeacher('+data.teacherId+',\'teacherTr'+teacherNum+'\')" style="color: blue;">删除</a></td></tr>';
+                        $("#showTeacher").append(tr);
+                    } else {
+                        $("#resultTip").modal("show");
+                        $("#resultTip").find(".project-modal-del").text(data.me);
+                    }
+                    $("#teacherForm")[0].reset(); // 提交后重置表单
+                }
+            });
+        }
+
+        return false;
+    }
+
+    /**
+     * 专利表单验证
+     */
+    function patentFormValidator() {
+        var patentName = $("#patentName").val();
+        var patentCategoryCode = $("#patentCategoryCode").val();
+        var patentCode = $("#patentCode").val();
+        var gainTime = $("#gainTime").val();
+
+        if(patentName.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("专利名称不能为空！");
+            return false;
+        }
+        if(patentCategoryCode.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("专利类别不能为空！");
+            return false;
+        }
+        if(patentCode.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("专利号不能为空！");
+            return false;
+        }
+        if(gainTime.trim() == ""){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("专利获得时间不能为空！");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 添加专利
+     */
+    function savePatent(){
+        var result = patentFormValidator();
+        if(result == true){
+            $('#patentForm').ajaxSubmit( {
+                url : "__CDN__/index/user/savePatent",
+                success: function(data) {
+                    if(data.flag=="success"){
+                        $("#resultTip").modal("show");
+                        $("#resultTip").find(".project-modal-del").text("添加专利成功");
+                        patentNum++;
+                        var tr = '<tr id="patentTr'+patentNum+'"><input type="hidden" value="'+data.id+'" /><td align="center">'+data.patent_name+'</td><td align="center">'+data.patent_type+'</td><td align="center">'+data.patent_no+'</td><td align="center">'+data.gain_date+'</td><td align="center"><a href="javascript:void(0);" onclick="delPatent('+data.id+',\'patentTr'+patentNum+'\')" style="color: blue;">删除</a></td></tr>';
+                        $("#showPatent").append(tr);
+                    } else {
+                        $("#resultTip").modal("show");
+                        $("#resultTip").find(".project-modal-del").text("添加专利失败！");
+                    }
+                    $("#patentForm")[0].reset(); // 提交后重置表单
+                }
+            });
+        }
+        return false;
+    }
+
+    /**
+     * 删除成员
+     * @param id 成员id
+     * @param name 成员name
+     * @param trId 删除的tr id
+     */
+    function delMember(id,trId){
+        var msg = "确定要删除成员吗？";
+        if(confirm(msg)){
+            $.ajax({
+                url: "__CDN__/index/user/delMember",
+                data:{id:id},
+                success: function (data) {
+                    if(data == 'success'){
+                        $("#resultTip").modal("show");
+                        $("#resultTip").find(".project-modal-del").text("删除成功");
+                        $("#"+trId).remove();
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     * 删除指导教师
+     * @param id 指导教师id
+     * @param trId 删除的tr id
+     */
+    function delTeacher(id,trId){
+        if(confirm("确定要删除该教师吗")){
+            $.ajax({
+                url: "__CDN__/index/user/delTeacher",
+                data:{id:id},
+                success: function (data) {
+                    if(data == 'success'){
+                        $("#resultTip").modal("show");
+                        $("#resultTip").find(".project-modal-del").text("删除成功");
+                        $("#"+trId).remove();
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     * 删除专利
+     * @param id 专利id
+     * @param trId 删除的tr id
+     */
+    function delPatent(id,trId){
+        if(confirm("确定要删除该专利吗")){
+            $.ajax({
+                url: "__CDN__/index/user/delPatent",
+                data:{id:id},
+                success: function (data) {
+                    if(data == 'success'){
+                        $("#resultTip").modal("show");
+                        $("#resultTip").find(".project-modal-del").text("删除成功");
+                        $("#"+trId).remove();
+                    }
+                }
+            });
+        }
+    }
+
+</script>

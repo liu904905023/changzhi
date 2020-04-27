@@ -1,0 +1,238 @@
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <input id="item_id" type="hidden" value="{$item_id}" />
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Group_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+                <div style="margin-top: 7px;">{$row.group_name}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Match_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.match_name}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Track_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.track_name}</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Item_name')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.item_name}</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Item_desc')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.item_desc}</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Founder_desc')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.founder_desc}</div>
+        </div>
+    </div>
+   <!-- <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Is_founder_lead')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{if $row.is_founder_lead == 'N'}否{elseif $row.is_founder_lead == 'Y'}是{/if}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Is_together')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{if $row.is_together == 'N'}否{elseif $row.is_together == 'Y'}是{/if}</div>
+        </div>
+    </div>-->
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Plan_paper_file')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{if $row.plan_paper_file == ''}无{else}<a href="{$row.plan_paper_file}">下载</a>{/if}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Other_file')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">
+                <div style="margin-top: 7px;">{if $row.other_file == ''}无{else}<a href="{$row.other_file}">下载</a>{/if}</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Vedio_file')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">
+                {if $row.vedio_file == ''}
+                    无
+                {else}
+                <video controls="controls">
+                    <source src="{$row.vedio_file}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+                    您的浏览器版本不支持该视频播放，请下载IE9+，火狐，谷歌等浏览器
+                </video>
+                {/if}
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Audit_status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.audit_status}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Item_status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.item_status}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('User_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$userInfo.nickname}</div>
+        </div>
+    </div>
+    {if $investList != null}
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Invest')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <table border="1px solid #000" style="width: 600px;">
+                <tr>
+                    <td align="center">投资机构名称</td>
+                    <td align="center">融资阶段</td>
+                    <td align="center">投资金额</td>
+                    <td align="center">获得时间</td>
+                </tr>
+                {foreach name='investList' item='vo'}
+                <tr>
+                    <td align="center">{$vo.invest_name}</td>
+                    <td align="center">{$vo.invest_stage}</td>
+                    <td align="center">{$vo.invest_amount}万元</td>
+                    <td align="center">{$vo.gain_time}</td>
+                </tr>
+                {/foreach}
+            </table>
+        </div>
+    </div>
+    {/if}
+
+    {if $memberList != null}
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Member')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <table border="1px solid #000" style="width: 600px;">
+                <tr>
+                    <td align="center">成员姓名</td>
+                    <td align="center">学院</td>
+                    <td align="center">学校</td>
+                    <td align="center">专业</td>
+                    <td align="center">年级</td>
+                    <td align="center">学历</td>
+                    <td align="center">学号</td>
+                    <td align="center">团队角色</td>
+                </tr>
+                {foreach name='memberList' item='vo'}
+                <tr>
+                    <td align="center">{$vo.member_name}</td>
+                    <td align="center">{$vo.college}</td>
+                    <td align="center">{$vo.school_name}</td>
+                    <td align="center">{$vo.major}</td>
+                    <td align="center">{$vo.grade}</td>
+                    <td align="center">{$vo.education}</td>
+                    <td align="center">{$vo.sno}</td>
+                    <td align="center">{$vo.team_role}</td>
+                </tr>
+                {/foreach}
+            </table>
+        </div>
+    </div>
+    {/if}
+
+    {if $patentList != null}
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Patent')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <table border="1px solid #000" style="width: 600px;">
+                <tr>
+                    <td align="center">专利名称</td>
+                    <td align="center">专利号</td>
+                    <td align="center">取得日期</td>
+                    <td align="center">专业类型</td>
+                </tr>
+                {foreach name='patentList' item='vo'}
+                <tr>
+                    <td align="center">{$vo.patent_name}</td>
+                    <td align="center">{$vo.patent_no}</td>
+                    <td align="center">{$vo.gain_date}</td>
+                    <td align="center">{$vo.patent_type}</td>
+                </tr>
+                {/foreach}
+            </table>
+        </div>
+    </div>
+    {/if}
+
+    {if $stockList != null}
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Stock')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <table border="1px solid #000" style="width: 600px;">
+                <tr>
+                    <td align="center">股东身份</td>
+                    <td align="center">股东</td>
+                    <td align="center">持股比例</td>
+                </tr>
+                {foreach name='stockList' item='vo'}
+                <tr>
+                    <td align="center">{$vo.stockholder_type}</td>
+                    <td align="center">{$vo.stockholder}</td>
+                    <td align="center">{$vo.hold_ratio}</td>
+                </tr>
+                {/foreach}
+            </table>
+        </div>
+    </div>
+    {/if}
+
+    {if $teacherList != null}
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Teacher')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <table border="1px solid #000" style="width: 600px;">
+                <tr>
+                    <td align="center">姓名</td>
+                    <td align="center">手机号码</td>
+                    <td align="center">电子邮箱</td>
+                    <td align="center">学校</td>
+                    <td align="center">部门</td>
+                    <td align="center">职称</td>
+                </tr>
+                {foreach name='teacherList' item='vo'}
+                <tr>
+                    <td align="center">{$vo.teacher_name}</td>
+                    <td align="center">{$vo.teacher_mobile}</td>
+                    <td align="center">{$vo.teacher_email}</td>
+                    <td align="center">{$vo.school_name}</td>
+                    <td align="center">{$vo.department}</td>
+                    <td align="center">{$vo.positional_title}</td>
+                </tr>
+                {/foreach}
+            </table>
+        </div>
+    </div>
+    {/if}
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="button" id="closeButton" class="btn btn-success btn-embossed">{:__('关闭')}</button>
+        </div>
+    </div>
+</form>

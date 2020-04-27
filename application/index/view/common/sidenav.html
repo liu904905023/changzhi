@@ -1,0 +1,22 @@
+<div class="edit_l fl">
+    <div class="edit_l_top">
+        <div class="per_op">
+            <a href="" class="edit_l_data tc fl">编辑资料</a>
+            <img src="__CDN__/assets/img/tx.jpg" class="edit_per_avatar"/>
+            <a href="" class="edit_l_adopt tc fr">通过验证</a>
+        </div>
+        <p class="tc per_name">{$user.nickname}</p>
+        <p class="tc per_det">
+            {$user.school_name}<br />
+            {$user.major}<br />
+            Tel：{$user.mobile}<br />
+            Email：{$user.email}
+        </p>
+    </div>
+    <div class="edit_l_link wbg">
+        <a href="{:url('index/user/index')}" class="on">我的项目</a>
+        <a href="{:url('index/user/profile')}" >个人资料</a>
+        <a href="{:url('index/user/changepwd')}" >修改密码</a>
+        <a href="{:url('index/user/logout')}">注销</a>
+    </div>
+</div>

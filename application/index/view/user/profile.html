@@ -1,0 +1,215 @@
+<style>
+    .profile-avatar-container {
+        position:relative;
+        width:100px;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+</style>
+<div id="content-container" class="container">
+    <div class="row">
+        <div class="col-md-3">
+            {include file="common/sidenav" /}
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2 class="page-header">{:__('Profile')}</h2>
+                    <form id="profile-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('index/user/saveProfile')}">
+                        {:token()}
+                        <input type="hidden" name="avatar" id="c-avatar" value="{:$user->getData('avatar')}" />
+
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-2">{:__('Username')}:</label><span class="red">*</span></label>
+                            <div class="col-xs-12 col-sm-4">
+                                <input type="text" class="form-control" id="username" name="username" readonly="readonly"
+                                       value="{$user.username|htmlentities}" data-rule="required;username;remote({:url('api/validate/check_username_available')}, id={$user.id})" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-2">{:__('Studentname')}:</label><span class="red">*</span></label>
+                            <div class="col-xs-12 col-sm-4">
+                                <input type="text" class="form-control" id="nickname" name="nickname" value="{$user.nickname|htmlentities}" data-rule="required"  placeholder="姓名必须2-4个字符">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-2">{:__('Gender')}:</label>
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="controls" style="margin-top: 5px">
+                                    <input type="radio" name="gender" value="0" {if $user.gender == '0'}checked{/if} />男
+                                    <input type="radio" name="gender" value="1" {if $user.gender == '1'}checked{/if} />女
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label class="control-label col-xs-12 col-sm-2">{:__('College')}:</label><span class="red">*</span></label>-->
+                            <!--<div class="col-xs-12 col-sm-4">-->
+                                <!--<input type="text" class="form-control" id="college" name="college" value="{$user.college|htmlentities}" data-rule="required" placeholder="">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-2">{:__('School')}:</label><span class="red">*</span></label>
+                            <div class="col-xs-12 col-sm-4">
+                                <input type="hidden" id="school" name="school" value="{$user.school|htmlentities}">
+                                <input type="text" class="form-control" value="{$user.school_name|htmlentities}" readonly="readonly" placeholder="">
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="c-email" class="control-label col-xs-12 col-sm-2">{:__('Email')}:</label><span class="red">*</span></label>
+                            <div class="col-xs-12 col-sm-4">
+                                    <input type="text" class="form-control" id="c-email" name="email" value="{$user.email|htmlentities}" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <span class="red">*</span></label><label for="c-mobile" class="control-label col-xs-12 col-sm-2">{:__('Mobile')}:</label>
+                            <div class="col-xs-12 col-sm-4">
+                                    <input type="text" class="form-control" id="c-mobile" name="mobile" value="{$user.mobile|htmlentities}" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="c-bio" class="control-label col-xs-12 col-sm-2">{:__('Intro')}:</label>
+                            <div class="col-xs-12 col-sm-8">
+                                <input id="c-bio" data-rule="" data-tip="一句话介绍一下你自己" class="form-control" name="bio" type="text" value="{$user.bio|htmlentities}">
+                            </div>
+                        </div>
+                        <div class="form-group normal-footer">
+                            <label class="control-label col-xs-12 col-sm-2"></label>
+                            <div class="col-xs-12 col-sm-8">
+                                <button type="button" onclick="beforeProfile()" class="btn btn-success btn-embossed">{:__('Ok')}</button>
+                                <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 通用信息提示 -->
+<div class="modal fade" tabindex="-1" role="dialog" id="resultTip" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header modal-header-defined ">
+                <button type="button" class="close close-defined" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title modal-title-defined text-center" id="resultTitle">温馨提示</h4>
+            </div>
+            <div class="modal-body project-modal-text">
+                <span class="project-modal-prompt" id="resultIcon"></span>
+                <div class="project-modal-info">
+                    <p class="project-modal-del" id="resultMessage">
+                        已成功发送邀请，请通知你的团队成员登录大创网→进入个人中心→点击“我的消息”，接受你的邀请。
+                    </p>
+                    <div class="form-group clearfix modal-confirm" style="padding-left: 70px;">
+                        <button class="btn btn-default modal-btn-info-save" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-layer {height:100%;min-height:150px;min-width:300px;}
+    .form-body {
+        width:100%;
+        overflow:auto;
+        top:0;
+        position:absolute;
+        z-index:10;
+        bottom:50px;
+        padding:15px;
+    }
+    .form-layer .form-footer {
+        height:50px;
+        line-height:50px;
+        background-color: #ecf0f1;
+        width:100%;
+        position:absolute;
+        z-index:200;
+        bottom:0;
+        margin:0;
+    }
+    .form-footer .form-group{
+        margin-left:0;
+        margin-right:0;
+    }
+</style>
+
+<script>
+    /**
+     * 个人资料验证
+     */
+    function beforeProfile(){
+        var nickname = $("#nickname").val();
+        var college = $("#college").val();
+        var mobile = $("#c-mobile").val();
+        var email = $("#c-email").val();
+        if(nickname == ''){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("姓名不能为空");
+            return false;
+        }
+        if(nickname.length < 2){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("姓名不能少于2个字符");
+            return false;
+        }
+        if(college == ''){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("学院不能为空");
+            return false;
+        }
+        if(mobile == ''){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("手机号不能为空");
+            return false;
+        }
+        //手机号验证正则
+        var myreg = /^[1-9]\d*$/;
+        if(mobile.length != 11 || !myreg.test(mobile)){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("请输入有效的手机号码");
+            return false;
+        }
+        if(email == ''){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("邮箱不能为空");
+            return false;
+        }
+        //邮箱正则
+        var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+        if(!reg.test(email)){
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("请输入有效的邮箱");
+            return false;
+        }
+        $("#profile-form").submit();
+    }
+</script>

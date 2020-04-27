@@ -1,0 +1,57 @@
+<form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label for="username" class="control-label col-xs-12 col-sm-2">{:__('Username')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="username" name="row[username]" value="" data-rule="required;username" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="nickname" class="control-label col-xs-12 col-sm-2">{:__('ExpertName')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="nickname" name="row[nickname]" value=" " data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password" class="control-label col-xs-12 col-sm-2">{:__('Password')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="password" class="form-control" id="password" name="row[password]" autocomplete="new-password" value="" data-rule="required;password" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email" class="control-label col-xs-12 col-sm-2">{:__('Email')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="email" class="form-control" id="email" name="row[email]" value="" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="mobile" class="control-label col-xs-12 col-sm-2">{:__('Mobile')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="mobile" name="row[mobile]" value="" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="technical_title" class="control-label col-xs-12 col-sm-2">{:__('Technical_title')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="technical_title" name="row[technical_title]" value="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="personal_introduce" class="control-label col-xs-12 col-sm-2">{:__('Personal_introduce')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea class="form-control" id="personal_introduce" name="row[personal_introduce]"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[status]', ['normal'=>__('Normal'), 'hidden'=>__('Hidden')])}
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

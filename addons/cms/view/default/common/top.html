@@ -1,0 +1,19 @@
+<div class="top lbg">
+    <a href="/" class="logo fl">
+        <img style="width:399px;" src="__ADDON__/img/logo.png" alt="{cms:config name="cms.title"/}"></a>
+    <div class="nav fl">
+        {cms:channellist id="nav" type="top" condition="1=isnav"}
+        <a href="{$nav.url}">{$nav.name}</a>
+        {/cms:channellist}
+    </div>
+    <div class="operat fr">
+        {if $user}
+        <a href="{:url('index/user/index')}">{$user.nickname}</a>
+        <a href="{:url('index/user/index')}" class="on">我的作品</a>
+        {else /}
+        <a href="{:url('index/user/login')}">登录</a>
+        <a href="{:url('index/user/register')}">注册</a>
+        {/if}
+        <a href="{:url('admin/index/login')}" class="manage_entry tc">管理入口</a>
+    </div>
+</div>

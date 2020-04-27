@@ -1,0 +1,233 @@
+<!--  content  -->
+<div class="content hbg3">
+    <div class="container">
+        <!--  左侧 信息 导航  -->
+        {include file="common/sidenav" /}
+
+        <!--  右侧 作品  -->
+        <div class="edit_r fr">
+            <div class="pro_title wbg">我的作品<a href="javascript:void(0);" onclick="createProject();" class="fsize14 fr borderRadius en_btn">创建作品</a></div>
+            <!-- 作品 -->
+            {foreach name='list' item='row'}
+            <div class="pro_sect mt20">
+                <div class="pro_item mt15 wbg">
+                    <div class="pro_item_l fl">
+                        <p class="pro_item_title">
+                            {php}
+                                if(strlen($row['item_name']) > 40) {
+                                    echo mb_substr($row['item_name'],0,15)."...";
+                                }else{
+                                    echo $row['item_name'];
+                                }
+                            {/php}
+                            <span class="tips ybg">{$row.audit_status}</span>
+                            <span class="tips">{$row.item_status}</span>
+                        </p>
+                        <ul class="pro_group">
+                            <li class="borderRadius hbg2 mr20 mt30 tc">
+                                <p class="pro_pos f_lgray">- 参赛教师 -</p>
+                                <p class="pro_lead fsize18">{$row.nickname}</p>
+                            </li>
+                            <li class="borderRadius hbg2 mr20 mt30 tc">
+                                <p class="pro_pos f_lgray">- 参赛赛道 -</p>
+                                <p class="pro_lead fsize18">{$row.track_name}</p>
+                            </li>
+                            <li class="borderRadius hbg2 mr20 mt30 tc">
+                                <p class="pro_pos f_lgray">- 参赛组别 -</p>
+                                <p class="pro_lead fsize18">{$row.group_name}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pro_item_r fr">
+                        <a href="javascript:void(0);" onclick="detail('{$row.item_id}')" class="en_btn borderRadius gbg mb20">详情</a>
+                        {if $row.audit_status != '审核通过' || ($row.item_status == '半决赛' && $row.createtime < $allowDate)}
+                            <a href="javascript:void(0);" onclick="edit('{$row.item_id}')" class="en_btn borderRadius gbg mb20">编辑</a>
+                            <a href="javascript:void(0);" onclick="del('{$row.item_id}')" class="en_btn borderRadius gbg">删除</a>
+                        {else /}
+                            <!--<a href="javascript:void(0);" onclick="scoreDecord('{$row.item_id}','{$row.item_status}')" class="en_btn borderRadius gbg">{$row.item_status}</a>-->
+                        {/if}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            {/foreach}
+        </div>
+    </div>
+</div>
+
+<!-- 通用信息提示 -->
+<div class="modal fade" tabindex="-1" role="dialog" id="resultTip" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header modal-header-defined ">
+                <button type="button" class="close close-defined" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title modal-title-defined text-center" id="resultTitle">温馨提示</h4>
+            </div>
+            <div class="modal-body project-modal-text">
+                <span class="project-modal-prompt" id="resultIcon"></span>
+                <div class="project-modal-info">
+                    <p class="project-modal-del" id="resultMessage">
+                        已成功发送邀请，请通知你的团队成员登录大创网→进入个人中心→点击“我的消息”，接受你的邀请。
+                    </p>
+                    <div class="form-group clearfix modal-confirm" style="padding-left: 70px;">
+                        <button class="btn btn-default modal-btn-info-save" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    /**
+     * 创建作品
+     */
+    function createProject(){
+        if('{$errorMsg}' == ''){
+            location.href = "{:url('index/user/createproject')}";
+        }else{
+            $("#resultTip").modal("show");
+            $("#resultTip").find(".project-modal-del").text("{$errorMsg}");
+        }
+    }
+
+    function del(id){
+        var str = "确定要删除该作品吗？";
+        if (confirm(str)) {
+            $.ajax({
+                type: "post",
+                url: "__CDN__/index/user/delProject",
+                data: {
+                    itemId: id
+                },
+                success: function (data) {
+                    $("#resultTip").modal("show");
+                    $("#resultTip").find(".project-modal-del").text("删除成功");
+                    window.location.reload();
+                }
+            });
+        }
+    }
+
+    function edit(id){
+        location.href = "__CDN__/index/user/createproject?projectId=" + id;
+    }
+
+    /**
+     * 详情
+     */
+    function detail(id){
+        //弹窗
+        layer.open({
+            id: 'child_detail',//定义子页面的ID标记
+            type: 2,
+            title: '详情',
+            maxmin: true,
+            area: ['800px', '500px'],
+            content: "__CDN__/index/user/detail?id=" + id,
+            success : function(){
+                var frameId=document.getElementById('child_detail').getElementsByTagName("iframe")[0].id;//获取子页面的iframe的ID
+                $("#"+frameId).contents().find('.top').css('display','none');//隐藏header
+                $("#"+frameId).contents().find('.f_copyright').css('display','none');//隐藏footer
+            }
+        });
+    }
+
+    /**
+     * 评分记录
+     * @param id 作品id
+     * @param item_status 作品阶段
+     */
+    function scoreDecord(id,item_status){
+        $.ajax({
+            url: '__CDN__/index/user/scoreDecord',
+            type: 'POST',
+            data: {projectId:id,item_status:item_status},
+            dataType: 'json',
+            beforeSend: function (XMLHttpRequest) {
+                layer.msg('正在读取数据，请稍候……', { icon: 16, shade: 0.01,shadeClose:false,time:3000 });
+            },
+            success: function (json) {
+                //数据
+                var list = json.list;
+                var finalList = json.finalList;
+                //计算评分状态
+                var scoreCount = json.halfCount;
+                var finalCount = json.finalCount;
+                //评分状态
+                var scoreStatus = "";
+
+                var result = '<table border="1px solid #000" style="width: 750px;">';
+                if(item_status == '半决赛'){
+                    //评分情况赋值
+                    if(scoreCount['expertCount'] != 0 && scoreCount['scoreCount'] == 0){
+                        scoreStatus = '未评分';
+                    }else if(scoreCount['expertCount'] != 0 && scoreCount['scoreCount'] > 0 && scoreCount['scoreCount'] < scoreCount['expertCount']){
+                        scoreStatus = '评分中';
+                    }else if(scoreCount['expertCount'] != 0 && scoreCount['scoreCount'] == scoreCount['expertCount']){
+                        scoreStatus = '已评分';
+                    }
+                    //判断评分状态
+                    if(scoreStatus == '未评分'){
+                        result += '<tr style="background-color: #eee"><td style="background-color: #ccc;padding-left:20px;" colspan="3">'+item_status+': 未评分</td></tr>';
+                    }else if(scoreStatus == '评分中'){
+                        result += '<tr style="background-color: #eee"><td style="background-color: #ccc;padding-left:20px;" colspan="3">'+item_status+': 评分中</td></tr>';
+                    }else if(scoreStatus == '已评分'){
+                        for (var row in list) {
+                            //表头只添加一次
+                            if(row == 0){
+                                result += '<tr style="background-color: #eee"><td style="background-color: #ccc;padding-left:20px;" colspan="3">'+item_status+': '+list[row]['half_score']+'分</td></tr> ';
+                            }
+                            result += '<tr><td align="center">'+list[row]['nickname']+'</td><td align="center">'+list[row]['score']+'分</td><td align="center">'+list[row]['score_detail']+'</td></tr>'
+                        }
+                        result += '</table>';
+                    }
+                }else if(item_status = '总决赛'){
+                    //作品为总决赛，则半决赛必定评分
+                    for (var row in list) {
+                        //表头只添加一次
+                        if(row == 0){
+                            result += '<tr style="background-color: #eee"><td style="background-color: #ccc;padding-left:20px;" colspan="3">'+item_status+': '+list[row]['half_score']+'分</td></tr> ';
+                        }
+                        result += '<tr><td align="center">'+list[row]['nickname']+'</td><td align="center">'+list[row]['score']+'分</td><td align="center">'+list[row]['score_detail']+'</td></tr>'
+                    }
+                    result += '</table>';
+                    //总决赛评分情况赋值
+                    if(finalCount['expertCount'] != 0 && finalCount['scoreCount'] == 0){
+                        scoreStatus = '未评分';
+                    }else if(finalCount['expertCount'] != 0 && finalCount['scoreCount'] > 0 && finalCount['scoreCount'] < finalCount['expertCount']){
+                        scoreStatus = '评分中';
+                    }else if(finalCount['expertCount'] != 0 && finalCount['scoreCount'] == finalCount['expertCount']){
+                        scoreStatus = '已评分';
+                    }
+                    //判断总决赛评分状态
+                    if(scoreStatus == '未评分'){
+                        result += '<table border="1px solid #000" style="width: 750px;"><tr style="background-color: #eee"><td style="background-color: #ccc;padding-left:20px;" colspan="3">'+item_status+': 未评分</td></tr>';
+                    }else if(scoreStatus == '评分中'){
+                        result += '<table border="1px solid #000" style="width: 750px;"><tr style="background-color: #eee"><td style="background-color: #ccc;padding-left:20px;" colspan="3">'+item_status+': 评分中</td></tr>';
+                    }else if(scoreStatus == '已评分'){
+                        for (var row in finalList) {
+                            //表头只添加一次
+                            if(row == 0){
+                                result += '<table border="1px solid #000" style="width: 750px;"><tr style="background-color: #eee"><td style="background-color: #ccc;padding-left:20px;" colspan="3">'+item_status+': '+finalList[row]['half_score']+'分</td></tr> ';
+                            }
+                            result += '<tr><td align="center">'+finalList[row]['nickname']+'</td><td align="center">'+finalList[row]['score']+'分</td><td align="center">'+finalList[row]['score_detail']+'</td></tr>'
+                        }
+                        result += '</table>';
+                    }
+                }
+
+                //弹窗
+                layer.open({
+                    type: 1,
+                    title: '评分记录',
+                    maxmin: true,
+                    area: ['750px', '450px'],
+                    content: result
+                });
+            }
+        });
+
+    }
+</script>

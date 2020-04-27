@@ -1,0 +1,120 @@
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <input id="item_id" type="hidden" value="{$item_id}" />
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Group_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+                <div style="margin-top: 7px;">{$row.group_name}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Match_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.match_name}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Track_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.track_name}</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Item_name')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.item_name}</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Item_desc')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.item_desc}</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Founder_desc')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.founder_desc}</div>
+        </div>
+    </div>
+   <!-- <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Is_founder_lead')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{if $row.is_founder_lead == 'N'}否{elseif $row.is_founder_lead == 'Y'}是{/if}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Is_together')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{if $row.is_together == 'N'}否{elseif $row.is_together == 'Y'}是{/if}</div>
+        </div>
+    </div>-->
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Plan_paper_file')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{if $row.plan_paper_file == ''}无{else}<a href="{$row.plan_paper_file}">下载</a>{/if}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Other_file')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">
+                <div style="margin-top: 7px;">{if $row.other_file == ''}无{else}<a href="{$row.other_file}">下载</a>{/if}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Vedio_file')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">
+                {if $row.vedio_file == ''}
+                    无
+                {else}
+                <video controls="controls">
+                    <source src="{$row.vedio_file}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+                    您的浏览器版本不支持该视频播放，请下载IE9+，火狐，谷歌等浏览器
+                </video>
+                {/if}
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Audit_status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.audit_status}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Item_status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$row.item_status}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('User_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">{$userInfo.nickname}</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('First_score')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div style="margin-top: 7px;">
+                <input type="text" class="form-control" id="first_score" value="{$firstScore}" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="button" id="scoreButton" class="btn btn-success btn-embossed">{:__('评分')}</button>
+            <button type="button" id="closeButton" class="btn btn-default btn-embossed">{:__('关闭')}</button>
+        </div>
+    </div>
+</form>
