@@ -86,7 +86,11 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','template'], function 
                             align:"center",
                             formatter:function(index,value){
                                 if(value.expertCount != 0 && value.scoreCount == value.expertCount){
-                                    var arr = value.score_detail.split(",");
+                                    if(value.score_detail) {
+                                        var arr = value.score_detail.split(",");
+                                    }else {
+                                        arr = '';
+                                    }
                                     var names = value.ad_name.split(",");
                                     var res = "";
                                     for(var i = 0;i < arr.length;i++){
@@ -144,7 +148,11 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','template'], function 
                             align:"center",
                             formatter:function(index,value){
                                 if(value.expertCount != 0 && value.scoreCount == value.expertCount){
-                                    var arr = value.score_detail.split(",");
+                                    if(value.score_detail) {
+                                        var arr = value.score_detail.split(",");
+                                    }else {
+                                        arr = '';
+                                    }
                                     var names = value.ad_name.split(",");
                                     var res = "";
                                     for(var i = 0;i < arr.length;i++){
