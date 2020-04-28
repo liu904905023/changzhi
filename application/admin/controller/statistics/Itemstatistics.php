@@ -48,7 +48,7 @@ class Itemstatistics extends Backend
                 ->alias("i")
                 ->field("s.school_name,count(i.item_id) num,
                         sum(i.audit_status = '审核通过') pass,
-                        sum(i.item_status = '半决赛') halfMatch,
+                        sum(i.item_status = '复赛') halfMatch,
                         sum(i.item_status = '总决赛') totalMatch,
                         sum(i.item_status = '答辩') defence")
                 ->join("user u","u.id=i.user_id","left")
@@ -64,7 +64,7 @@ class Itemstatistics extends Backend
                 ->alias("i")
                 ->field("'合计' as school_name,count(i.item_id) num,
                         sum(i.audit_status='审核通过') pass,
-                        sum(i.item_status = '半决赛') halfMatch,
+                        sum(i.item_status = '复赛') halfMatch,
                         sum(i.item_status = '总决赛') totalMatch,
                         sum(i.item_status = '答辩') defence")
                 ->where($where)

@@ -43,7 +43,7 @@ return [
     'Package'           => '项目打包',
     'Score_count'       => '评分情况',
     'Track_group'       => '赛道组别',
-    'Half_match'        => '半决赛',
+    'Half_match'        => '复赛',
     'Final_match'       => '总决赛',
     'Half_match_score'  => '分数',
     'Score_record'      => '评分记录',

@@ -48,16 +48,16 @@ class Groupexpert extends Backend
                 sum(case when  s.is_score='N' and s.stage = '初赛' and g.group_name like  '%成长组%' then 1 else 0 end) as cs_czz_n,
                 sum(case  when s.is_score='Y' and s.stage = '初赛' then 1 else 0 end) as cs_hj_y,
                 sum(case when  s.is_score='N' and s.stage = '初赛' then 1 else 0 end) as cs_hj_n,
-                sum(case  when s.is_score='Y' and s.stage = '半决赛' and g.group_name = '创新组' then 1 else 0 end) as bjs_cxz_y,
-                sum(case when  s.is_score='N' and s.stage = '半决赛' and g.group_name = '创新组' then 1 else 0 end) as bjs_cxz_n,
-                sum(case  when s.is_score='Y' and s.stage = '半决赛' and g.group_name = '创意组' then 1 else 0 end) as bjs_cyz_y,
-                sum(case when  s.is_score='N' and s.stage = '半决赛' and g.group_name = '创意组' then 1 else 0 end) as bjs_cyz_n,
-                sum(case  when s.is_score='Y' and s.stage = '半决赛' and g.group_name like '%初创组%' then 1 else 0 end) as bjs_ccz_y,
-                sum(case when  s.is_score='N' and s.stage = '半决赛' and g.group_name  like '%初创组%' then 1 else 0 end) as bjs_ccz_n,
-                sum(case  when s.is_score='Y' and s.stage = '半决赛' and g.group_name like  '%成长组%' then 1 else 0 end) as bjs_czz_y,
-                sum(case when  s.is_score='N' and s.stage = '半决赛' and g.group_name like  '%成长组%' then 1 else 0 end) as bjs_czz_n,
-                sum(case  when s.is_score='Y' and s.stage = '半决赛' then 1 else 0 end) as bjs_hj_y,
-                sum(case when  s.is_score='N' and s.stage = '半决赛' then 1 else 0 end) as bjs_hj_n,
+                sum(case  when s.is_score='Y' and s.stage = '复赛' and g.group_name = '创新组' then 1 else 0 end) as bjs_cxz_y,
+                sum(case when  s.is_score='N' and s.stage = '复赛' and g.group_name = '创新组' then 1 else 0 end) as bjs_cxz_n,
+                sum(case  when s.is_score='Y' and s.stage = '复赛' and g.group_name = '创意组' then 1 else 0 end) as bjs_cyz_y,
+                sum(case when  s.is_score='N' and s.stage = '复赛' and g.group_name = '创意组' then 1 else 0 end) as bjs_cyz_n,
+                sum(case  when s.is_score='Y' and s.stage = '复赛' and g.group_name like '%初创组%' then 1 else 0 end) as bjs_ccz_y,
+                sum(case when  s.is_score='N' and s.stage = '复赛' and g.group_name  like '%初创组%' then 1 else 0 end) as bjs_ccz_n,
+                sum(case  when s.is_score='Y' and s.stage = '复赛' and g.group_name like  '%成长组%' then 1 else 0 end) as bjs_czz_y,
+                sum(case when  s.is_score='N' and s.stage = '复赛' and g.group_name like  '%成长组%' then 1 else 0 end) as bjs_czz_n,
+                sum(case  when s.is_score='Y' and s.stage = '复赛' then 1 else 0 end) as bjs_hj_y,
+                sum(case when  s.is_score='N' and s.stage = '复赛' then 1 else 0 end) as bjs_hj_n,
                 sum(case  when s.is_score='Y' and s.stage = '总决赛' and g.group_name = '创新组' then 1 else 0 end) as zjs_cxz_y,
                 sum(case when  s.is_score='N' and s.stage = '总决赛' and g.group_name = '创新组' then 1 else 0 end) as zjs_cxz_n,
                 sum(case  when s.is_score='Y' and s.stage = '总决赛' and g.group_name = '创意组' then 1 else 0 end) as zjs_cyz_y,
@@ -74,7 +74,7 @@ class Groupexpert extends Backend
                 ->join("match_item i","i.item_id = s.item_id","left")
                 ->join('match_group g','i.group_id=g.group_id','LEFT')
                 ->where($where)
-                ->where('i.item_status','半决赛')
+                ->where('i.item_status','复赛')
                 ->group("a.nickname")
                 ->count();
 
@@ -82,16 +82,16 @@ class Groupexpert extends Backend
                 ->alias("s")
                 ->field("
                 a.nickname,
-                sum(case  when s.is_score='Y' and s.stage = '半决赛' and g.group_name = '创新组' then 1 else 0 end) as bjs_cxz_y,
-                sum(case when  s.is_score='N' and s.stage = '半决赛' and g.group_name = '创新组' then 1 else 0 end) as bjs_cxz_n,
-                sum(case  when s.is_score='Y' and s.stage = '半决赛' and g.group_name = '创意组' then 1 else 0 end) as bjs_cyz_y,
-                sum(case when  s.is_score='N' and s.stage = '半决赛' and g.group_name = '创意组' then 1 else 0 end) as bjs_cyz_n,
-                sum(case  when s.is_score='Y' and s.stage = '半决赛' and g.group_name like '%初创组%' then 1 else 0 end) as bjs_ccz_y,
-                sum(case when  s.is_score='N' and s.stage = '半决赛' and g.group_name  like '%初创组%' then 1 else 0 end) as bjs_ccz_n,
-                sum(case  when s.is_score='Y' and s.stage = '半决赛' and g.group_name like  '%成长组%' then 1 else 0 end) as bjs_czz_y,
-                sum(case when  s.is_score='N' and s.stage = '半决赛' and g.group_name like  '%成长组%' then 1 else 0 end) as bjs_czz_n,
-                sum(case  when s.is_score='Y' and s.stage = '半决赛' then 1 else 0 end) as bjs_hj_y,
-                sum(case when  s.is_score='N' and s.stage = '半决赛' then 1 else 0 end) as bjs_hj_n,
+                sum(case  when s.is_score='Y' and s.stage = '复赛' and g.group_name = '创新组' then 1 else 0 end) as bjs_cxz_y,
+                sum(case when  s.is_score='N' and s.stage = '复赛' and g.group_name = '创新组' then 1 else 0 end) as bjs_cxz_n,
+                sum(case  when s.is_score='Y' and s.stage = '复赛' and g.group_name = '创意组' then 1 else 0 end) as bjs_cyz_y,
+                sum(case when  s.is_score='N' and s.stage = '复赛' and g.group_name = '创意组' then 1 else 0 end) as bjs_cyz_n,
+                sum(case  when s.is_score='Y' and s.stage = '复赛' and g.group_name like '%初创组%' then 1 else 0 end) as bjs_ccz_y,
+                sum(case when  s.is_score='N' and s.stage = '复赛' and g.group_name  like '%初创组%' then 1 else 0 end) as bjs_ccz_n,
+                sum(case  when s.is_score='Y' and s.stage = '复赛' and g.group_name like  '%成长组%' then 1 else 0 end) as bjs_czz_y,
+                sum(case when  s.is_score='N' and s.stage = '复赛' and g.group_name like  '%成长组%' then 1 else 0 end) as bjs_czz_n,
+                sum(case  when s.is_score='Y' and s.stage = '复赛' then 1 else 0 end) as bjs_hj_y,
+                sum(case when  s.is_score='N' and s.stage = '复赛' then 1 else 0 end) as bjs_hj_n,
                 sum(case  when s.is_score='Y' and s.stage = '总决赛' and g.group_name = '创新组' then 1 else 0 end) as zjs_cxz_y,
                 sum(case when  s.is_score='N' and s.stage = '总决赛' and g.group_name = '创新组' then 1 else 0 end) as zjs_cxz_n,
                 sum(case  when s.is_score='Y' and s.stage = '总决赛' and g.group_name = '创意组' then 1 else 0 end) as zjs_cyz_y,

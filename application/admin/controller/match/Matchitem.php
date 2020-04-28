@@ -32,7 +32,7 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use think\Log;
 
 /**
- * 半决赛参赛项目
+ * 复赛参赛项目
  *
  * @icon fa fa-circle-o
  */
@@ -96,7 +96,7 @@ class Matchitem extends Backend
                 ->alias("matchitem")
                 ->field("matchitem.item_name,matchitem.half_score,matchitem.audit_status,matchitem.item_status,ms.school_name,matchitem.item_id,mg.group_name,mt.track_name,u.nickname,u.mobile,COUNT(s.score_id) AS expertCount,COUNT(s.score)AS scoreCount")
                 ->where($where)
-                ->where("matchitem.item_status","eq",'半决赛')
+                ->where("matchitem.item_status","eq",'复赛')
                 ->join("match m","m.match_id = matchitem.match_id","left")
                 ->join("match_group mg","mg.group_id = matchitem.group_id","left")
                 ->join("match_track mt","mt.track_id = matchitem.track_id","left")
@@ -111,7 +111,7 @@ class Matchitem extends Backend
                 ->alias("matchitem")
                 ->field("matchitem.item_name,matchitem.half_score,matchitem.audit_status,matchitem.item_status,ms.school_name,matchitem.item_id,mg.group_name,mt.track_name,u.nickname,u.mobile,COUNT(s.score_id) AS expertCount,COUNT(s.score)AS scoreCount")
                 ->where($where)
-                ->where("matchitem.item_status","eq",'半决赛')
+                ->where("matchitem.item_status","eq",'复赛')
                 ->join("match m","m.match_id = matchitem.match_id","left")
                 ->join("match_group mg","mg.group_id = matchitem.group_id","left")
                 ->join("match_track mt","mt.track_id = matchitem.track_id","left")
@@ -324,7 +324,7 @@ class Matchitem extends Backend
             ->join("fa_admin a","s.expert_id = a.id","left")
             ->join("fa_auth_group_access g","g.uid=s.expert_id","left")
             ->where("s.item_id","eq",$item_id)
-            ->where("s.stage","eq","半决赛")
+            ->where("s.stage","eq","复赛")
             ->where("g.group_id","eq",5)
             ->where("s.is_score","eq","Y")
             ->group("a.nickname,s.score,s.comment")

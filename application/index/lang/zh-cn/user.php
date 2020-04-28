@@ -120,5 +120,5 @@ return [
     'Package'           => '项目打包',
     'Score_count'       => '评分情况',
     'Track_group'       => '赛道组别',
-    'Half_match_score'       => '半决赛分数',
+    'Half_match_score'       => '复赛分数',
 ];

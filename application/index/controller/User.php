@@ -728,7 +728,7 @@ class User extends Frontend
                 return $msg;
             }else{
                 $arr['audit_status'] = '待审核';
-                $arr['item_status'] = '半决赛';
+                $arr['item_status'] = '复赛';
                 $arr['createtime'] = time();
                 $arr['user_id'] = $this->auth->id;
                 $matchItemModel->save($arr);
@@ -954,21 +954,21 @@ class User extends Frontend
         //数据
         $list = null;
         $final_list = null;
-        //半决赛计算评分状态
+        //复赛计算评分状态
         $scoreHalfCount = null;
         //总决赛计算评分状态
         $scoreFinalCount = null;
-        if($item_status == '半决赛'){
+        if($item_status == '复赛'){
             $list = $matchScoreModel->alias("s")
                 ->field("a.nickname,s.score,mi.half_score,GROUP_CONCAT(CONCAT(d.rule_name,':',d.score,'分') SEPARATOR ',') score_detail")
                 ->join("fa_match_score_detail d","s.score_id=d.score_id","left")
                 ->join("fa_match_item mi","mi.item_id = s.item_id","left")
                 ->join("fa_admin a","s.expert_id = a.id","left")
                 ->where("s.item_id","eq",$projectId)
-                ->where("s.stage","eq","半决赛")
+                ->where("s.stage","eq","复赛")
                 ->group("a.nickname,mi.half_score,s.score")
                 ->select();
-            $scoreHalfCount = $matchScoreModel->field("COUNT(score_id) AS expertCount,COUNT(score)AS scoreCount")->where("item_id","eq",$projectId)->where("stage","eq","半决赛")->select();
+            $scoreHalfCount = $matchScoreModel->field("COUNT(score_id) AS expertCount,COUNT(score)AS scoreCount")->where("item_id","eq",$projectId)->where("stage","eq","复赛")->select();
         }else if($item_status == '总决赛'){
             $list = $matchScoreModel->alias("s")
                 ->field("a.nickname,s.score,mi.half_score,GROUP_CONCAT(CONCAT(d.rule_name,':',d.score,'分') SEPARATOR ',') score_detail")
@@ -976,7 +976,7 @@ class User extends Frontend
                 ->join("fa_match_item mi","mi.item_id = s.item_id","left")
                 ->join("fa_admin a","s.expert_id = a.id","left")
                 ->where("s.item_id","eq",$projectId)
-                ->where("s.stage","eq","半决赛")
+                ->where("s.stage","eq","复赛")
                 ->group("a.nickname,mi.half_score,s.score")
                 ->select();
             $final_list = $matchScoreModel->alias("s")
@@ -988,7 +988,7 @@ class User extends Frontend
                 ->where("s.item_id","eq",$projectId)
                 ->group("a.nickname,mi.half_score,mi.final_score,s.score")
                 ->select();
-            $scoreHalfCount = $matchScoreModel->field("COUNT(score_id) AS expertCount,COUNT(score)AS scoreCount")->where("item_id","eq",$projectId)->where("stage","eq","半决赛")->select();
+            $scoreHalfCount = $matchScoreModel->field("COUNT(score_id) AS expertCount,COUNT(score)AS scoreCount")->where("item_id","eq",$projectId)->where("stage","eq","复赛")->select();
             $scoreFinalCount = $matchScoreModel->field("COUNT(score_id) AS expertCount,COUNT(score)AS scoreCount")->where("item_id","eq",$projectId)->where("stage","eq","总决赛")->select();
         }
         $res['list'] = $list;

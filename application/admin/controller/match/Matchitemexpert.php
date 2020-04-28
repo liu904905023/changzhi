@@ -29,7 +29,7 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 /**
- * 半决赛项目评分
+ * 复赛项目评分
  *
  * @icon fa fa-circle-o
  */
@@ -89,9 +89,9 @@ class Matchitemexpert extends Backend
                 ->alias("matchitem")
                 ->field("matchitem.item_name,matchitem.audit_status,matchitem.item_status,ms.school_name,matchitem.item_id,mg.group_name,mt.track_name,u.nickname,s.is_score,s.score")
                 ->where($where)
-                ->where("matchitem.item_status","eq",'半决赛')
+                ->where("matchitem.item_status","eq",'复赛')
                 ->where("s.expert_id","eq",$id)
-                ->where("s.stage","eq","半决赛")
+                ->where("s.stage","eq","复赛")
                 ->join("match m","m.match_id = matchitem.match_id","left")
                 ->join("match_group mg","mg.group_id = matchitem.group_id","left")
                 ->join("match_track mt","mt.track_id = matchitem.track_id","left")
@@ -105,9 +105,9 @@ class Matchitemexpert extends Backend
                 ->alias("matchitem")
                 ->field("matchitem.item_name,matchitem.audit_status,matchitem.item_status,ms.school_name,matchitem.item_id,mg.group_name,mt.track_name,u.nickname,s.is_score,s.score")
                 ->where($where)
-                ->where("matchitem.item_status","eq",'半决赛')
+                ->where("matchitem.item_status","eq",'复赛')
                 ->where("s.expert_id","eq",$id)
-                ->where("s.stage","eq","半决赛")
+                ->where("s.stage","eq","复赛")
                 ->join("match m","m.match_id = matchitem.match_id","left")
                 ->join("match_group mg","mg.group_id = matchitem.group_id","left")
                 ->join("match_track mt","mt.track_id = matchitem.track_id","left")
@@ -259,7 +259,7 @@ class Matchitemexpert extends Backend
         $ruleList = $ruleModel->alias("a")
             ->join("match_rule_item mr","mr.rule_id = a.rule_id","left")
             ->join("match_group g","a.rule_id = g.rule_id","left")
-            ->join("match_item i","i.group_id = g.group_id","left")
+            ->join("match_item i","i.track_id = g.track_id","left")
             ->where("i.item_id","eq",$id)
             ->select();
 
@@ -274,7 +274,7 @@ class Matchitemexpert extends Backend
             ->field("a.comment,a.score_id,a.score as totalScore,b.rule_name,b.score,b.rule_item_id")
             ->join("match_score_detail b","b.score_id =a.score_id","left")
             ->where("a.item_id","eq",$id)
-            ->where("a.stage","eq",'半决赛')
+            ->where("a.stage","eq",'复赛')
             ->where("a.expert_id","eq",$this->auth->id)
             ->select();
 
@@ -321,7 +321,7 @@ class Matchitemexpert extends Backend
         $score_id = $scoreModel->field("score_id")
             ->where("item_id","eq",$itemId)
             ->where("expert_id","eq",$this->auth->id)
-            ->where("stage","eq","半决赛")
+            ->where("stage","eq","复赛")
             ->select();
 
 
@@ -353,12 +353,12 @@ class Matchitemexpert extends Backend
         $row['comment'] = $comment;
         $result = $scoreModel->isUpdate(true)->where("score_id","eq",$score_id[0]['score_id'])->update($row);
 
-        //更新fa_match_item 半决赛字段
-        $is_scoreCount = $scoreModel->where('stage','半决赛')->where('is_score','N')->where('item_id',$itemId)->count('score_id');
+        //更新fa_match_item 复赛字段
+        $is_scoreCount = $scoreModel->where('stage','复赛')->where('is_score','N')->where('item_id',$itemId)->count('score_id');
         if ($is_scoreCount <= 0){
-            $maxScore_id = Matchscore::where('item_id',$itemId)->where('stage','半决赛')->whereNotNull('score')->order('score desc')->value('score_id');
-            $minScore_id = Matchscore::where('item_id',$itemId)->where('stage','半决赛')->whereNotNull('score')->order('score asc')->value('score_id');
-            $avg = Matchscore::whereNotIn('score_id',"{$maxScore_id},{$minScore_id}")->where('item_id',$itemId)->where('stage','半决赛')->avg('score');
+            $maxScore_id = Matchscore::where('item_id',$itemId)->where('stage','复赛')->whereNotNull('score')->order('score desc')->value('score_id');
+            $minScore_id = Matchscore::where('item_id',$itemId)->where('stage','复赛')->whereNotNull('score')->order('score asc')->value('score_id');
+            $avg = Matchscore::whereNotIn('score_id',"{$maxScore_id},{$minScore_id}")->where('item_id',$itemId)->where('stage','复赛')->avg('score');
             $halfScore['half_score'] = $avg;
             $halfScore['half_status'] = 'Y';
             $matchitemModel = new Matchitem();

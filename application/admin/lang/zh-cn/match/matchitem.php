@@ -44,7 +44,7 @@ return [
     'Package'           => '项目打包',
     'Score_count'       => '评分情况',
     'Track_group'       => '赛道组别',
-    'Half_match_score'       => '半决赛分数',
+    'Half_match_score'       => '复赛分数',
     'Promotion to the finals'           => '晋级总决赛',
     'Distribute the expert'           => '分配专家',
     'Is_distribute'     => '是否分配专家',

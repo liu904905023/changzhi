@@ -32,7 +32,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                 return value.pass;
                             }
                         }},
-                        {field: 'halfMatch', title: __('半决赛'),operate:false,formatter:function(index,value){
+                        {field: 'halfMatch', title: __('复赛'),operate:false,formatter:function(index,value){
                             if(value.halfMatch == null){
                                 return 0;
                             }else{

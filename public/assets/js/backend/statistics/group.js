@@ -25,7 +25,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                     [
                         {title: __(''),colspan:1},
                         {title: __('初赛'),colspan:5},
-                        {title: __('半决赛'),colspan:5},
+                        {title: __('复赛'),colspan:5},
                         {title: __('总决赛'),colspan:5}
                     ],
                     [

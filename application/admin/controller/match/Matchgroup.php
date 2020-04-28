@@ -189,7 +189,7 @@ class Matchgroup extends Backend
         $ruleModel = new Matchruleitem();
         $trackId = $this->request->get("trackId");
         $matchId = $this->request->get("matchId");
-        $trackNameList = $this->model->selTrackName($trackId);
+        $trackNameList = $this->model->selTrackName($matchId);
         $matchNameList = $matchTrackModel->selMatchName($matchId);
         $ruleNameList = $ruleModel->selRuleName();
         $this->view->assign("trackNameList",$trackNameList);

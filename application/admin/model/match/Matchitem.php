@@ -80,7 +80,7 @@ class Matchitem extends Model
 
     public function getItemStatusList()
     {
-        return ['初赛' => __('初赛'), '半决赛' => __('半决赛'), '总决赛' => __('总决赛'), '答辩' => __('答辩')];
+        return ['初赛' => __('初赛'), '复赛' => __('复赛'), '总决赛' => __('总决赛'), '答辩' => __('答辩')];
     }
 
 

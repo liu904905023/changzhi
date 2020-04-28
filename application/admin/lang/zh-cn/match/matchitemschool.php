@@ -48,7 +48,7 @@ return [
     'Package'           => '项目打包(每次≤50个)',
     'Score_count'       => '评分情况',
     'First_score'       => '初赛分数',
-    'Half_match_score'       => '半决赛分数',
+    'Half_match_score'       => '复赛分数',
     'Final_match_score'       => '总决赛分数',
     'Promotion to the finals'           => '晋级总决赛',
     'Distribute the expert'           => '分配专家'

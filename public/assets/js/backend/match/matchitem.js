@@ -187,12 +187,12 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','template'], function 
             });
 
             /**
-             * 半决赛分配专家列表
+             * 复赛分配专家列表
              */
             $(".btn-distribute_list").on("click", function (e) {
                 //获取选中id
                 var ids = Table.api.selectedids(table);
-                Fast.api.open("auth/expert/index?projectIds=" + ids + "&stage=半决赛", __('分配专家'),{
+                Fast.api.open("auth/expert/index?projectIds=" + ids + "&stage=复赛", __('分配专家'),{
                     callback:function(value){
                         table.bootstrapTable('refresh');
                     }

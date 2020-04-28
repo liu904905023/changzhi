@@ -51,11 +51,11 @@ class Group extends Backend
 	sum( CASE WHEN g.group_name='初创组' AND i.item_status='初赛' THEN 1 ELSE 0 END) AS 初赛初创组,
 	sum( CASE WHEN g.group_name='成长组' AND i.item_status='初赛' THEN 1 ELSE 0 END) AS 初赛成长组,
 	sum(CASE WHEN i.item_status='初赛' THEN 1 ELSE 0 END) as 初赛总数 ,
-	sum( CASE WHEN g.group_name='创新组' AND i.item_status='半决赛' THEN 1 ELSE 0 END) AS 半决赛创新组,
-	sum( CASE WHEN g.group_name='创意组' AND i.item_status='半决赛' THEN 1 ELSE 0 END) AS 半决赛创意组,
-	sum( CASE WHEN g.group_name='初创组' AND i.item_status='半决赛' THEN 1 ELSE 0 END) AS 半决赛初创组,
-	sum( CASE WHEN g.group_name='成长组' AND i.item_status='半决赛' THEN 1 ELSE 0 END) AS 半决赛成长组,
-	sum(CASE WHEN i.item_status='半决赛' THEN 1 ELSE 0 END) as 半决赛总数 ,
+	sum( CASE WHEN g.group_name='创新组' AND i.item_status='复赛' THEN 1 ELSE 0 END) AS 复赛创新组,
+	sum( CASE WHEN g.group_name='创意组' AND i.item_status='复赛' THEN 1 ELSE 0 END) AS 复赛创意组,
+	sum( CASE WHEN g.group_name='初创组' AND i.item_status='复赛' THEN 1 ELSE 0 END) AS 复赛初创组,
+	sum( CASE WHEN g.group_name='成长组' AND i.item_status='复赛' THEN 1 ELSE 0 END) AS 复赛成长组,
+	sum(CASE WHEN i.item_status='复赛' THEN 1 ELSE 0 END) as 复赛总数 ,
 	sum( CASE WHEN g.group_name='创新组' AND i.item_status='总决赛' THEN 1 ELSE 0 END) AS 总决赛创新组,
 	sum( CASE WHEN g.group_name='创意组' AND i.item_status='总决赛' THEN 1 ELSE 0 END) AS 总决赛创意组,
 	sum( CASE WHEN g.group_name='初创组' AND i.item_status='总决赛' THEN 1 ELSE 0 END) AS 总决赛初创组,
@@ -67,7 +67,7 @@ class Group extends Backend
                 ->join("match_school s","s.school_id = u.school","left")
                 ->join('match_group g','i.group_id=g.group_id','LEFT')
                 ->where($where)
-                ->where('i.item_status','半决赛')
+                ->where('i.item_status','复赛')
                 ->group("s.school_name")
                 ->count();
 
@@ -80,11 +80,11 @@ class Group extends Backend
 	sum( CASE WHEN g.group_name like '%初创组%' AND i.item_status='初赛' THEN 1 ELSE 0 END) AS cs_ccz,
 	sum( CASE WHEN g.group_name like  '%成长组%' AND i.item_status='初赛' THEN 1 ELSE 0 END) AS cs_czz,
 	sum(CASE WHEN i.item_status='初赛' THEN 1 ELSE 0 END) as cs_num ,
-	sum( CASE WHEN g.group_name='创新组' AND i.item_status='半决赛' THEN 1 ELSE 0 END) AS bjs_cxz,
-	sum( CASE WHEN g.group_name='创意组' AND i.item_status='半决赛' THEN 1 ELSE 0 END) AS bjs_cyz,
-	sum( CASE WHEN g.group_name like '%初创组%' AND i.item_status='半决赛' THEN 1 ELSE 0 END) AS bjs_ccz,
-	sum( CASE WHEN g.group_name like  '%成长组%' AND i.item_status='半决赛' THEN 1 ELSE 0 END) AS bjs_czz,
-	sum(CASE WHEN i.item_status='半决赛' THEN 1 ELSE 0 END) as bjs_num ,
+	sum( CASE WHEN g.group_name='创新组' AND i.item_status='复赛' THEN 1 ELSE 0 END) AS bjs_cxz,
+	sum( CASE WHEN g.group_name='创意组' AND i.item_status='复赛' THEN 1 ELSE 0 END) AS bjs_cyz,
+	sum( CASE WHEN g.group_name like '%初创组%' AND i.item_status='复赛' THEN 1 ELSE 0 END) AS bjs_ccz,
+	sum( CASE WHEN g.group_name like  '%成长组%' AND i.item_status='复赛' THEN 1 ELSE 0 END) AS bjs_czz,
+	sum(CASE WHEN i.item_status='复赛' THEN 1 ELSE 0 END) as bjs_num ,
 	sum( CASE WHEN g.group_name='创新组' AND i.item_status='总决赛' THEN 1 ELSE 0 END) AS zjs_cxz,
 	sum( CASE WHEN g.group_name='创意组' AND i.item_status='总决赛' THEN 1 ELSE 0 END) AS zjs_cyz,
 	sum( CASE WHEN g.group_name like '%初创组%' AND i.item_status='总决赛' THEN 1 ELSE 0 END) AS zjs_ccz,

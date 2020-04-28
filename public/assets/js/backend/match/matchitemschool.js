@@ -96,7 +96,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
 
                             {field: 'item_name', title: __('Item_name'),operate:'like'},
                             {field: 'audit_status', title: __('Audit_status'), searchList: {"草稿":__('草稿'),"待审核":__('待审核'),"审核通过":__('审核通过'),"审核未通过":__('审核未通过'),"归档":__('归档')}},
-                            {field: 'item_status', title: __('Item_status'), searchList: {"初赛":__('初赛'),"半决赛":__('半决赛'),"总决赛":__('总决赛')},"答辩":__('答辩'), formatter: Table.api.formatter.status},
+                            {field: 'item_status', title: __('Item_status'), searchList: {"初赛":__('初赛'),"复赛":__('复赛'),"总决赛":__('总决赛')},"答辩":__('答辩'), formatter: Table.api.formatter.status},
                             {field: 'scoreCount', title: __('Score_count'),operate:false,formatter:function(index,value){
                                 if(value.expertCount == 0){
                                     return "无";
@@ -149,7 +149,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                         text: __('推荐'),
                                         title: __('推荐'),
                                         hidden:function(row){
-                                            if(row.audit_status != '审核通过' || row.item_status == '半决赛' ||  row.item_status == '总决赛'){
+                                            if(row.audit_status != '审核通过' || row.item_status == '复赛' ||  row.item_status == '总决赛'){
                                                 return true;
                                             }
                                             if(auth_group_id == '2'){
@@ -217,7 +217,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
 
                             {field: 'item_name', title: __('Item_name'),operate:'like'},
                             {field: 'audit_status', title: __('Audit_status'), searchList: {"草稿":__('草稿'),"待审核":__('待审核'),"审核通过":__('审核通过'),"审核未通过":__('审核未通过'),"归档":__('归档')}},
-                            {field: 'item_status', title: __('Item_status'), searchList: {"初赛":__('初赛'),"半决赛":__('半决赛'),"总决赛":__('总决赛')},"答辩":__('答辩'), formatter: Table.api.formatter.status},
+                            {field: 'item_status', title: __('Item_status'), searchList: {"初赛":__('初赛'),"复赛":__('复赛'),"总决赛":__('总决赛')},"答辩":__('答辩'), formatter: Table.api.formatter.status},
                             {field: 'scoreCount', title: __('Score_count'),operate:false,formatter:function(index,value){
                                 if(value.expertCount == 0){
                                     return "无";
@@ -259,7 +259,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                         text: __('推荐'),
                                         title: __('推荐'),
                                         hidden:function(row){
-                                            if(row.audit_status != '审核通过' || row.item_status == '半决赛' ||  row.item_status == '总决赛'){
+                                            if(row.audit_status != '审核通过' || row.item_status == '复赛' ||  row.item_status == '总决赛'){
                                                 return true;
                                             }
                                             if(auth_group_id == '2'){

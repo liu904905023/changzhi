@@ -263,7 +263,7 @@ class Matchitemschool extends Backend
     }
 
     /**
-     * 批量推荐到半决赛
+     * 批量推荐到复赛
      */
     function batchrecommend(){
         $ids = $this->request->post("ids/a");
@@ -271,7 +271,7 @@ class Matchitemschool extends Backend
         $updateStatus = $itemModel->where('item_id', "IN", $ids)
             ->where(['item_status'=>'初赛'])
             ->where(['audit_status'=>'审核通过'])
-            ->update(['item_status'=>"半决赛"] );
+            ->update(['item_status'=>"复赛"] );
         if($updateStatus){
             $this->success('批量推荐成功!');
         }else{
@@ -300,11 +300,11 @@ class Matchitemschool extends Backend
     }
 
     /**
-     * 推荐到半决赛
+     * 推荐到复赛
      */
     function recommend(){
         $arr['item_id'] = $this->request->post("id");
-        $arr['item_status'] = '半决赛';
+        $arr['item_status'] = '复赛';
         $itemModel = new \app\admin\model\match\Matchitem();
         $itemModel->isUpdate(true)->save($arr);
         $this->success("推荐成功！");

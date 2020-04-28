@@ -71,8 +71,8 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','template'], function 
                                     var arr = value.score_record.split(",");
                                     var res = "";
                                     for(var i = 0;i < arr.length;i++){
-                                        if(arr[i].search("半决赛") > -1){
-                                            res += arr[i].replace("半决赛","") + "<br />";
+                                        if(arr[i].search("复赛") > -1){
+                                            res += arr[i].replace("复赛","") + "<br />";
                                         }
                                     }
                                     return res;
@@ -91,15 +91,15 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','template'], function 
                                     var res = "";
                                     for(var i = 0;i < arr.length;i++){
                                         for(var j = 0;j < arr.length;j++) {
-                                            if (arr[i].indexOf(names[j]) > -1 && arr[i].search("半决赛") > -1) {
+                                            if (arr[i].indexOf(names[j]) > -1 && arr[i].search("复赛") > -1) {
                                                 if(i == 0){
-                                                    res += "【" + names[j] + "】：" + arr[i].replace(names[j],"").replace("半决赛","") + "，";
+                                                    res += "【" + names[j] + "】：" + arr[i].replace(names[j],"").replace("复赛","") + "，";
                                                 }else if((i + 1) % 4 == 0){
-                                                    res += arr[i].replace(names[j],"").replace("半决赛","") + "<br />";
+                                                    res += arr[i].replace(names[j],"").replace("复赛","") + "<br />";
                                                 }else if(i % 4 == 0){
-                                                    res += "【" + names[j] + "】：" + arr[i].replace(names[j],"").replace("半决赛","") + "，";
+                                                    res += "【" + names[j] + "】：" + arr[i].replace(names[j],"").replace("复赛","") + "，";
                                                 }else{
-                                                    res += arr[i].replace(names[j],"").replace("半决赛","") + "，";
+                                                    res += arr[i].replace(names[j],"").replace("复赛","") + "，";
                                                 }
                                             }
                                         }

@@ -34,7 +34,7 @@ return [
     'Createtime'        => '创建时间',
     'User_id'           => '创建人',
     'First_score'       => '初赛得分',
-    'Half_score'        => '半决赛得分',
+    'Half_score'        => '复赛得分',
     'Final_score'       => '总决赛得分',
     'Half_status'       => 'Y 为 已评分  空为未评分或评分中',
     'Final_status'      => 'Y 为 已评分  空为未评分或评分中'

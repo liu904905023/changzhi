@@ -38,7 +38,7 @@ class Dashboard extends Backend
         $userNum = 0;
         //作品总数
         $worksNum = 0;
-        //半决赛数
+        //复赛数
         $halfNum = 0;
         //总决赛数
         $totalNum = 0;
@@ -46,7 +46,7 @@ class Dashboard extends Backend
         if($authName[0]['name'] == '平台管理员' || $authName[0]['name'] == 'Admin group' || $authName[0]['name'] == '专家评委'){
             $userNum = $userModel->count();
             $worksNum = $matchItemModel->count();
-            $halfNum = $matchItemModel->where("item_status","eq","半决赛")->count();
+            $halfNum = $matchItemModel->where("item_status","eq","复赛")->count();
             $totalNum = $matchItemModel->where("item_status","eq","总决赛")->count();
         }else if($authName[0]['name'] == '学校管理员'){
             //学校id
@@ -64,7 +64,7 @@ class Dashboard extends Backend
                 ->count();
             $halfNum = $matchItemModel->alias("a")
                 ->join("user u","u.id = a.user_id","left")
-                ->where("item_status","eq","半决赛")
+                ->where("item_status","eq","复赛")
                 ->where("u.school","eq",$school_id)
                 ->count();
             $totalNum = $matchItemModel->alias("a")
