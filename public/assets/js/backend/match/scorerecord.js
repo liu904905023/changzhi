@@ -27,7 +27,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','template'], function 
                         {checkbox: true,rowspan: 2},
                         {field: 'item_id', title: __('Id'),rowspan: 2,operate:false},
                         {field: 'track_name', title: __('Track_id'),rowspan: 2,operate:false},
-                        {field: 'group_name', title: __('Group_id'),rowspan: 2,operate:false},
+                        // {field: 'group_name', title: __('Group_id'),rowspan: 2,operate:false},
                         {field: 'item_name', title: __('Item_name'),rowspan: 2,operate:'like'},
                         {field: 'school_name', title: __('School_name'),rowspan: 2,operate:false},
                         {field: 'nickname', title: __('User_id'),rowspan: 2,operate:false},

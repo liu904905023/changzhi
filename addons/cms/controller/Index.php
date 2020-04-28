@@ -32,14 +32,13 @@ class Index extends Base
             $match_prize =  $this->replace_p($matchList[0]['match_prize']);
         }
         $title =$this->auth->nickname?"就业指导中心比赛"."/".$this->auth->nickname:"就业指导中心比赛/姓名";
-        $this->view->assign("title",$title);
-
         $this->view->assign("committee",$committee);
         $this->view->assign("match_org",$match_org);
         $this->view->assign("match_org_contact",$match_org_contact);
         $this->view->assign("match_group",$match_group);
         $this->view->assign("match_schedule",$match_schedule);
         $this->view->assign("match_prize",$match_prize);
+        $this->view->assign("title",$title);
         Config::set('cms.title', Config::get('cms.title') ? Config::get('cms.title') : __('Home'));
         return $this->view->fetch('/index');
     }

@@ -661,7 +661,7 @@ $(function () {
 					trigger: 'blur',
 					validators: {
 						notEmpty: {
-							message: '项目名称不能为空！3'
+							message: '项目名称不能为空！'
 						},
 						stringLength: {
 							max: 50,
@@ -897,7 +897,7 @@ $(function () {
 					trigger: 'blur',
 					validators: {
 						notEmpty: {
-							message: '项目名称不能为空！4'
+							message: '项目名称不能为空！'
 						},
 						stringLength: {
 							max: 50,

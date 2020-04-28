@@ -134,11 +134,11 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                     return "女";
                                 }
                             }},
-                            // {field: 'college', title: __('College'),operate:false},
+                            //{field: 'college', title: __('College'),operate:false},
                             {field: 'school_name', title: __('School'),operate:false},
                             {field: 'school_id', title: __('School'),visible:false, searchList: $.getJSON("ajax/schoolselect")},
-                            // {field: 'major', title: __('Major'),operate:false},
-                            // {field: 'class', title: __('Class'),operate:false},
+                          //  {field: 'major', title: __('Major'),operate:false},
+                            //{field: 'class', title: __('Class'),operate:false},
                             {field: 'createtime', title: __('Createtime'), operate:false, addclass:'datetimerange', formatter: Table.api.formatter.datetime},
                             {field: 'audit_status',operate:false, title: __('AuditStatus'),formatter:function(index,value){
                                 if(value.audit_status == '0'){

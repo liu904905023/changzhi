@@ -617,7 +617,7 @@ class User extends Frontend
        $match_item_id = null;
        $matchItemModel = new Matchitem();
        $id = $this->request->post('id');
-       $arr['group_id'] = $this->request->post('group_id');
+       $arr['group_id'] = "";
        $arr['match_id'] = $this->request->post('match_id');
        $arr['track_id'] = $this->request->post('track_id');
        $arr['logo_avatar'] = "";
@@ -723,7 +723,7 @@ class User extends Frontend
             $matchCount = $matchItemModel->where(['user_id' => $this->auth->id])->count();
             if ($matchCount>=1) {
                 $msg['flag'] = 'false';
-                $msg['message'] = '添加参赛主题失败,一位教师只允许参加一个参赛主题！';
+                $msg['message'] = '添加参赛作品失败,一位教师只允许参加一个参赛作品！';
                 $msg['item_id'] = $match_item_id;
                 return $msg;
             }else{

@@ -58,7 +58,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','template'], function 
                     [
                         {checkbox: true},
                         {field: 'item_id', title: __('Id'),operate:false},
-                        {field: 'group_name', title: __('Group_id'),operate:false},
+                        // {field: 'group_name', title: __('Group_id'),operate:false},
                         {field: 'track_name', title: __('Track_id'),operate:false},
                         {field: 'item_name', title: __('Item_name'),operate:'like'},
                         {field: 'school_name', title: __('School_name'),operate:false},

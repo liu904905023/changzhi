@@ -34,7 +34,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                     [
                         {checkbox: true},
                         {field: 'item_id', title: __('Id'),operate:false},
-                        // {field: 'group_name', title: __('Group_id'),operate:false},
+                        // {field: 'group_name', title: __('Group_id'),operate:false},//隐藏group组别
                         {field: 'track_name', title: __('Track_id'),operate:false},
                         {field: 'item_name', title: __('Item_name'),operate:'like'},
                         {field: 'school_name', title: __('School_name'),operate:false},

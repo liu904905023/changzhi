@@ -91,8 +91,8 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                             {field: 'item_id', title: __('Id'),operate:false},
                             {field: 'track_name', title: __('Track_id'),operate:false},
                             {field: 'track_id', title: __('Track_id'),visible:false, searchList: $.getJSON("ajax/trackList")},
-                            {field: 'group_name', title: __('Group_id'),operate:false},
-                            {field: 'group_id', title: __('Group_id'),visible:false, searchList: $.getJSON("ajax/groupList")},
+                            // {field: 'group_name', title: __('Group_id'),operate:false},
+                            // {field: 'group_id', title: __('Group_id'),visible:false, searchList: $.getJSON("ajax/groupList")},
 
                             {field: 'item_name', title: __('Item_name'),operate:'like'},
                             {field: 'audit_status', title: __('Audit_status'), searchList: {"草稿":__('草稿'),"待审核":__('待审核'),"审核通过":__('审核通过'),"审核未通过":__('审核未通过'),"归档":__('归档')}},
@@ -212,7 +212,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                             {field: 'item_id', title: __('Id'),operate:false},
                             {field: 'track_name', title: __('Track_id'),operate:false},
                             {field: 'track_id', title: __('Track_id'),visible:false, searchList: $.getJSON("ajax/trackList")},
-                            {field: 'group_name', title: __('Group_id'),operate:false},
+                            // {field: 'group_name', title: __('Group_id'),operate:false},
                             {field: 'group_id', title: __('Group_id'),visible:false, searchList: $.getJSON("ajax/groupList")},
 
                             {field: 'item_name', title: __('Item_name'),operate:'like'},
