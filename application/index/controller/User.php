@@ -622,6 +622,7 @@ class User extends Frontend
        $arr['track_id'] = $this->request->post('track_id');
        $arr['logo_avatar'] = "";
        $arr['item_name'] = $this->request->post('name');
+       $arr['topicrange'] = $this->request->post('topicrange');
        $arr['city'] = "";
 //       $list= $this->request->param('category/a');
 //       $category = null;

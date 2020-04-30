@@ -91,7 +91,6 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                             {field: 'item_id', title: __('Id'),operate:false},
                             {field: 'track_name', title: __('Track_id'),operate:false},
                             {field: 'track_id', title: __('Track_id'),visible:false, searchList: $.getJSON("ajax/trackList")},
-                            // {field: 'group_name', title: __('Group_id'),operate:false},
                             // {field: 'group_id', title: __('Group_id'),visible:false, searchList: $.getJSON("ajax/groupList")},
 
                             {field: 'item_name', title: __('Item_name'),operate:'like'},

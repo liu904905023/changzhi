@@ -37,19 +37,34 @@
                             </select>
                         </div>
                     </div>
-                    <!--<div class="form-group">-->
-                        <!--<div class="group-title">-->
-                            <!--<span class="star">*</span>-->
-                            <!--<span class="title">组别</span>-->
-                        <!--</div>-->
-                        <!--<div class="group-content clearfix">-->
-                            <!--<select name="group_id" data-rule="required" class="form-control">-->
-                                <!--{foreach name="groupList" item="vo"}-->
-                                <!--<option value="{$vo.group_id}" {if $row.group_id == $vo.group_id}selected="selected"{/if}>{$vo.track_name."-".$vo.group_name}</option>-->
-                                <!--{/foreach}-->
-                            <!--</select>-->
-                        <!--</div>-->
-                    <!--</div>-->
+                    <div class="form-group">
+                        <div class="group-title">
+                            <span class="star">*</span>
+                            <span class="title">选题范围</span>
+                        </div>
+                        <div class="group-content clearfix">
+                            <select name="topicrange" data-rule="required" class="form-control">
+                                <option value="职业规划与生涯发展" {if $row.topicrange=="职业规划与生涯发展"}selected="selected"{/if}>职业规划与生涯发展</option>
+                                <option value="能力与职业发展" {if $row.topicrange == "能力与职业发展"}selected="selected"{/if}>能力与职业发展</option>
+                                <option value="职业兴趣与职业发展" {if $row.topicrange == "职业兴趣与职业发展"}selected="selected"{/if}>职业兴趣与职业发展</option>
+                                <option value="性格与职业发展" {if $row.topicrange == "性格与职业发展"}selected="selected"{/if}>性格与职业发展</option>
+                                <option value="价值观与职业发展" {if $row.topicrange == "价值观与职业发展"}selected="selected"{/if}>价值观与职业发展</option>
+                                <option value="认识职业世界" {if $row.topicrange == "认识职业世界"}selected="selected"{/if}>认识职业世界</option>
+                                <option value="认识大学生就业形势" {if $row.topicrange == "认识大学生就业形势"}selected="selected"{/if}>认识大学生就业形势</option>
+                                <option value="职业信息搜集" {if $row.topicrange == "职业信息搜集"}selected="selected"{/if}>职业信息搜集</option>
+                                <option value="职业决策" {if $row.topicrange == "职业决策"}selected="selected"{/if}>职业决策</option>
+                                <option value="大学生活与职业生涯发展" {if $row.topicrange == "大学生活与职业生涯发展"}selected="selected"{/if}>大学生活与职业生涯发展</option>
+                                <option value="就业信息的获取与识别" {if $row.topicrange == "大学生活与职业生涯发展"}selected="selected"{/if}>就业信息的获取与识别</option>
+                                <option value="简历撰写" {if $row.topicrange == "简历撰写"}selected="selected"{/if}>简历撰写</option>
+                                <option value="面试准备" {if $row.topicrange == "面试准备"}selected="selected"{/if}>面试准备</option>
+                                <option value="求职礼仪" {if $row.topicrange == "求职礼仪"}selected="selected"{/if}>求职礼仪</option>
+                                <option value="求职心理调适" {if $row.topicrange == "求职心理调适"}selected="selected"{/if}>求职心理调适</option>
+                                <option value="就业权益保护" {if $row.topicrange == "就业权益保护"}selected="selected"{/if}>就业权益保护</option>
+                                <option value="从学生到职业人的过渡" {if $row.topicrange == "从学生到职业人的过渡"}selected="selected"{/if}>从学生到职业人的过渡</option>
+                                <option value="个人成长与职业发展" {if $row.topicrange == "个人成长与职业发展"}selected="selected"{/if}>个人成长与职业发展</option>
+                            </select>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <div class="group-title">
