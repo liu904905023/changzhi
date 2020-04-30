@@ -33,6 +33,7 @@ var initUploaders = function (uploaders) {
             runtimes: 'html5,flash,silverlight,html4',
             browse_button: browse_button_id,
             url: upload_url,
+            max_retries: 3,     //允许重试次数
             flash_swf_url: flash_swf_url,
             silverlight_xap_url: silverlight_xap_url,
             multipart_params: {
@@ -59,22 +60,21 @@ var initUploaders = function (uploaders) {
                         // browse_button_id.siblings('.filename').html(file.name)
 //                            process.find('.filesize').html(plupload.formatSize(file.size) + ', ');
                     });
-                    index = layer.msg('由于文件大，上传较慢，请耐心等待...', {shade: [0.3, '#000']})
+                    $('.mask').show();
                     up.start();
                 },
 
                 UploadProgress: function (up, file) {
-                    process.find('.percent').html(file.percent + '%');
+                    $('.percent').html(file.percent + '%');
                 },
 
                 FileUploaded: function (up, file, result) {
                     var responseJson = JSON.parse(result.response);
                     var filepath = base+responseJson.url;
                     input.val(filepath);
-                    layer.close(index);
+                    $('.mask').hide();
                     $("#resultTip").find(".project-modal-del").text("上传成功");
                     $("#resultTip").modal("show");
-                    // alert('上传成功')
                 },
                 Error: function (up, err) {
                     $("#resultTip").find(".project-modal-del").text(err.message);
