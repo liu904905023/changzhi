@@ -181,7 +181,7 @@
                         <div class="group-content">
                             <input type="hidden" id='otherUrl' name="otherUrl" value="{$row.other_file}"/>
                             <button id="pickfiles2" class="browse_button file-input pull-left" data-upload-url="upload.php" data-extensions="ppt,pptx"
-                                    data-max-size="20mb" >点击上传
+                                    data-max-size="100mb" >点击上传
                             </button>
                             <div class="process pull-left">
                                 {if $row.other_file != ''}
@@ -194,7 +194,7 @@
                             <div style="clear:both;"></div>
 
                             <p>
-                                格式为ppt、pptx，不超过20M，文件数量限一个。
+                                格式为ppt、pptx，不超过100M，文件数量限一个。
                             </p>
                         </div>
 
