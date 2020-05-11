@@ -356,9 +356,9 @@ class Matchitemexpert extends Backend
         //更新fa_match_item 复赛字段
         $is_scoreCount = $scoreModel->where('stage','复赛')->where('is_score','N')->where('item_id',$itemId)->count('score_id');
         if ($is_scoreCount <= 0){
-            $maxScore_id = Matchscore::where('item_id',$itemId)->where('stage','复赛')->whereNotNull('score')->order('score desc')->value('score_id');
-            $minScore_id = Matchscore::where('item_id',$itemId)->where('stage','复赛')->whereNotNull('score')->order('score asc')->value('score_id');
-            $avg = Matchscore::whereNotIn('score_id',"{$maxScore_id},{$minScore_id}")->where('item_id',$itemId)->where('stage','复赛')->avg('score');
+//            $maxScore_id = Matchscore::where('item_id',$itemId)->where('stage','复赛')->whereNotNull('score')->order('score desc')->value('score_id');
+//            $minScore_id = Matchscore::where('item_id',$itemId)->where('stage','复赛')->whereNotNull('score')->order('score asc')->value('score_id');
+            $avg = Matchscore::where('item_id',$itemId)->where('stage','复赛')->avg('score');
             $halfScore['half_score'] = $avg;
             $halfScore['half_status'] = 'Y';
             $matchitemModel = new Matchitem();

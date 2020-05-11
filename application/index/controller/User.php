@@ -507,7 +507,8 @@ class User extends Frontend
         $memberModel = new Matchitemmember();
         $teacherModel = new Matchitemteacher();
         $patentModel = new Matchitempatent();
-
+        //比赛时间
+        $matchEndTime = $matchModel->field('sign_end_time')->find();
         //下拉数据
         $matchList = $matchModel->selMatch();
         $groupList = $matchModel->selGroup();
@@ -602,6 +603,8 @@ class User extends Frontend
         $this->view->assign('userId', $student_id);
         $this->view->assign('username', $userList['nickname']);
         $this->view->assign('schoolName', $userList);
+        $this->view->assign("matchEndTime", $matchEndTime['sign_end_time']);
+
         $this->view->assign('title', __('Profile'));
         $tetle =$this->auth->nickname?"就业指导中心比赛"."/".$this->auth->nickname:"就业指导中心比赛/姓名";
         $this->view->assign("tetle",$tetle);

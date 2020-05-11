@@ -4,7 +4,7 @@ var uploaders = [];
 var options = {
     'bucket': 'match-file',
     'save-key': '/{year}/{mon}/{day}/{filemd5}{.suffix}',
-    'expiration': Math.floor(new Date().getTime() / 1000) + 86400
+    'expiration': Math.floor(new Date().getTime() / 1000) + 216000
 };
 // 查看更多参数：http://docs.upyun.com/api/form_api/#表单API接口简介
 var policy = window.btoa(JSON.stringify(options));
@@ -27,18 +27,19 @@ var initUploaders = function (uploaders) {
         var flash_swf_url = './plupload/Moxie.swf',
             silverlight_xap_url = './plupload/Moxie.xap';
 
-        var index = null; // 遮罩实例
 
         var uploader = new plupload.Uploader({
             runtimes: 'html5,flash,silverlight,html4',
             browse_button: browse_button_id,
             url: upload_url,
-            max_retries: 3,     //允许重试次数
+            // max_retries: 3,     //允许重试次数
+            offset:0,
+            chunk_size : '1mb',
+            // unique_names : true,
             flash_swf_url: flash_swf_url,
             silverlight_xap_url: silverlight_xap_url,
             multipart_params: {
-                'Filename': '${filename}', // adding this to keep consistency across the runtimes
-                'Content-Type': '',
+                 'Content-Type': '',
                 'policy': policy,
                 'signature': signature,
             },
@@ -57,6 +58,7 @@ var initUploaders = function (uploaders) {
                     plupload.each(files, function (file) {
                         // process.attr('id', file.id).removeClass('none');
                         process.find('.filename').html(file.name);
+
                         // browse_button_id.siblings('.filename').html(file.name)
 //                            process.find('.filesize').html(plupload.formatSize(file.size) + ', ');
                     });
@@ -66,6 +68,7 @@ var initUploaders = function (uploaders) {
 
                 UploadProgress: function (up, file) {
                     $('.percent').html(file.percent + '%');
+                    // console.log('[UploadProgress]', 'File:', file, "Total:", up.total);
                 },
 
                 FileUploaded: function (up, file, result) {

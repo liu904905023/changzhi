@@ -66,22 +66,21 @@
             </div>
         </div>
     </div>
-    <!--<div class="form-group">
+    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Vedio_file')}:</label>
         <div class="col-xs-12 col-sm-8">
             <div style="margin-top: 7px;">
                 {if $row.vedio_file == ''}
-                    无
+                无
                 {else}
-                <video controls="controls">
+                <video controls="controls"  style="max-width: 80%;">
                     <source src="{$row.vedio_file}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
                     您的浏览器版本不支持该视频播放，请下载IE9+，火狐，谷歌等浏览器
                 </video>
                 {/if}
             </div>
         </div>
-    </div>-->
-
+    </div>
 
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Audit_status')}:</label>

@@ -211,7 +211,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         }
                         var table = $(that).closest('table');
                         var options = table.bootstrapTable('getOptions');
-                        Fast.api.open("match/matchitemexpert/audit_view?id="+row.item_id+"&type=viewDetail", __('查看'))
+                        Fast.api.open("match/matchitemexpert/audit_view?id="+row.item_id+"&type=viewDetail", __('查看'),{area: ['100%', '100%']})
                     },
                     'click .btn-scoring': function (e, value, row, index) {
                         e.stopPropagation();
@@ -225,9 +225,11 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         if ($(window).width() < 480) {
                             top = left = undefined;
                         }
+
                         var table = $(that).closest('table');
                         var options = table.bootstrapTable('getOptions');
                         Fast.api.open("match/matchitemexpert/scoring_view?id="+row.item_id, __('评分'),{
+                            area: ['100%', '100%'],
                             callback:function(value){
                                 Toastr.success("评分成功");
                                 table.bootstrapTable('refresh');

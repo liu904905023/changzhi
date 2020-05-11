@@ -181,7 +181,7 @@
                         <div class="group-content">
                             <input type="hidden" id='otherUrl' name="otherUrl" value="{$row.other_file}"/>
                             <button id="pickfiles2" class="browse_button file-input pull-left" data-upload-url="upload.php" data-extensions="ppt,pptx"
-                                    data-max-size="100mb" >点击上传
+                                    data-max-size="500mb" >点击上传
                             </button>
                             <div class="process pull-left">
                                 {if $row.other_file != ''}
@@ -194,7 +194,7 @@
                             <div style="clear:both;"></div>
 
                             <p>
-                                格式为ppt、pptx，不超过100M，文件数量限一个。
+                                格式为ppt、pptx，不超过500M，文件数量限一个。
                             </p>
                         </div>
 
@@ -208,22 +208,23 @@
                         <div class="group-content">
                             <input type="hidden" id="vedioUrl" name="vedioUrl" value="{$row.vedio_file}"/>
 
-                            <button id="pickfiles3" class="browse_button file-input pull-left" data-upload-url="upload.php" data-extensions="mpeg,mp4"
-                                    data-max-size="2048mb" >点击上传
-                            </button>
+                            <div style="border: 2px solid buttonface;float: left;position: relative;color:#FFF;background-color: #4877ed; width: 72px;height: 30px;line-height: 26px; text-align: center; ">
+                                <input style="opacity: 0; position: absolute; left: 0; right: 0; top: 0; bottom: 0;" id="slice" class="browse_button_fen file-input pull-left" data-upload-url="upload.php" data-extensions="mpeg,mp4"
+                                       data-max-size="4096mb" type="file" accept="video/mp4,video/mpeg">点击上传
+                            </div>
                             <div class="process pull-left">
                                 {if $row.vedio_file != ''}
                                 <span >
-                                <a style="color: blue" class="filename" href="{$row.vedio_file}">{$row.item_name}-教学视频.{$vedioFileSuffix}</a></span>
+                                <a style="color: blue" class="filenames" href="{$row.vedio_file}">{$row.item_name}-教学视频.{$vedioFileSuffix}</a></span>
                                 {else/}
-                                <a class="filename" style="padding-left: 8px; color: blue" href=""></a>
+                                <a class="filenames" style="padding-left: 8px; color: blue" href=""></a>
                                 {/if}
-                                <a class="percent" style="padding-left: 8px; color: blue" href=""></a>
+                                <a class="percents" style="padding-left: 8px; color: blue" href=""></a>
 
                             </div>
                             <div style="clear:both;"></div>
                             <p>
-                            格式为mp4或mpeg，不超过2048M，视频数量限一个。
+                                格式为mp4或mpeg，不超过2048M，视频数量限一个。
                             </p>
                         </div>
                     </div>
@@ -236,7 +237,11 @@
 
                 <button type="submit" class="hide" id="hiddenSub"></button>
                 <div class="form-group text-center">
+                    {if ( strtotime($matchEndTime)>=time())}
                     <button type="button" onclick="addItem()" class="btn btn-primary subform-inline">保存</button>
+                    {else/}
+                    <button type="button"  class="btn btn-default subform-inline">已超时禁止报名</button>
+                    {/if}
                     <button type="button" id="cancelForm" onclick="history.go(-1);" class="btn btn-default subform-inline">取消</button>
                 </div>
             </div>
@@ -346,6 +351,8 @@
     </div>
 </div>
 <script src="__CDN__/assets/js/frontend/main.js"></script>
+<script src="__CDN__/assets/js/frontend/base64.min.js"></script>
+<script src="__CDN__/assets/js/frontend/hash.js"></script>
 
 <script>
     var num = 0;
@@ -354,9 +361,9 @@
 
     $(document).ready(function(){
         //如果 项目id不为空 则展示下方表单
-       if('{$project_id}' != ''){
+        if('{$project_id}' != ''){
             $("#afterForm").removeClass("hidden");
-       }
+        }
         //id号 根据数据条数增加
         var memberNum = '{$memberNum}';
         num = num + memberNum-1;
@@ -366,8 +373,8 @@
         patentNum = patentNum + patNum-1;
     });
     /*
-	 * logo上传
-	 */
+     * logo上传
+     */
     function upload_logo(id) {
         FU.ajaxFileUpload({
             url: "{:url('index/user/upload')}",
@@ -390,32 +397,32 @@
     /*
      * 项目计划书验证
      */
-//    $(document).off('change','#physicalFileId').on('change','#physicalFileId',function(e){
-//        var filemaxsize = 20 * 1024;
-//        var target = $(e.target);
-//        if (target[0].files.length == 0) {
-//            $('#errorPhysical').html("error!").removeClass("hide");
-//        } else {
-//            var Size = target[0].files[0].size / 1024;
-//            var fileName = target[0].files[0].name;
-//            var fileExt = (/[.]/.exec(fileName)) ? /[^.]+$/.exec(fileName.toLowerCase()) : '';
-//            if (!fileExt[0].match(/pdf|PDF|doc|docx|DOC|DOCX$/)) {
-//                //$('#checkimg').next().html('请选择正确的图片!').show();
-//                $('#errorPhysical').html("请选择正确的文件!").removeClass("hide");
-//                $('#errorPhysical').next().css("display", "none");
-//                return false;
-//            } else if (Size > filemaxsize) {
-//                $('#errorPhysical').html("文件过大，请重新选择!").removeClass("hide");
-//                $('#errorPhysical').next().css("display", "none");
-//                return false;
-//            } else {
-//                upload_file(this.id);
-//                $("#physicalDown").addClass("hidden");
-//                var texts = target[0].files[0].name;
-//                $('#errorPhysical').html(texts).removeClass("hide");
-//            }
-//        }
-//    });
+    //    $(document).off('change','#physicalFileId').on('change','#physicalFileId',function(e){
+    //        var filemaxsize = 20 * 1024;
+    //        var target = $(e.target);
+    //        if (target[0].files.length == 0) {
+    //            $('#errorPhysical').html("error!").removeClass("hide");
+    //        } else {
+    //            var Size = target[0].files[0].size / 1024;
+    //            var fileName = target[0].files[0].name;
+    //            var fileExt = (/[.]/.exec(fileName)) ? /[^.]+$/.exec(fileName.toLowerCase()) : '';
+    //            if (!fileExt[0].match(/pdf|PDF|doc|docx|DOC|DOCX$/)) {
+    //                //$('#checkimg').next().html('请选择正确的图片!').show();
+    //                $('#errorPhysical').html("请选择正确的文件!").removeClass("hide");
+    //                $('#errorPhysical').next().css("display", "none");
+    //                return false;
+    //            } else if (Size > filemaxsize) {
+    //                $('#errorPhysical').html("文件过大，请重新选择!").removeClass("hide");
+    //                $('#errorPhysical').next().css("display", "none");
+    //                return false;
+    //            } else {
+    //                upload_file(this.id);
+    //                $("#physicalDown").addClass("hidden");
+    //                var texts = target[0].files[0].name;
+    //                $('#errorPhysical').html(texts).removeClass("hide");
+    //            }
+    //        }
+    //    });
     /*
      * 上传教学计划书
      */
@@ -974,5 +981,236 @@
             });
         }
     }
+    $("#slice").change(function(event) {
+        $('.mask').show();
+        initPost()
+    });
 
+    var file;
+    var size;
+
+    var bucket;
+    var operator;
+    var pwd;
+    var spath;
+    var url;
+    var uri;
+    var method = 'POST';
+
+    var x_upyun_next_part_id;//分块序号，由服务端产生
+    var x_upyun_multi_uuid;//分块上传任务标识，由服务端initiate阶段产生
+    var x_upyun_next_part_size;//分块大小，单位字节
+    var x_upyun_remain_size;//剩余上传大小，单位字节
+
+    var x_upyun_multi_part_size;//文件分块大小，分块大小默认是1M的整数倍，最大10M，最后一个分块例外，单位字节
+    var x_upyun_multi_type;//上传文件的MIME类型，默认 application/octet-stream
+
+    //初始化分片上传任务
+    function initPost() {
+        file = $("#slice")[0].files[0];
+        $('.filenames').text(file['name']);
+        var filename = HexMD5.MD5(file['name']).toString(HexMD5.enc.Hex);
+        console.log(filename);
+        var suffix=/\.[^\.]+$/.exec(file['name'])[0];
+        size = file.size;
+        x_upyun_remain_size = size;
+        x_upyun_multi_part_size = 1048576;
+        x_upyun_multi_type = getContentType();
+
+        bucket = "match-file";
+        operator = "zhaoyang";
+        pwd = "Lxq0ykCsvZ6q7abFfvzw51QmcxgOxr3B";
+        base = 'http://matchfile.wlzjedu.com';
+        spath = '<?php echo "/upload/".date("Y",time())."/".date("m",time())."/".date("d",time());?>/'+filename+suffix;
+        $("#vedioUrl").val(base + spath);
+        url = 'http://v0.api.upyun.com/' + bucket + spath;
+        uri = '/' + bucket + spath;
+        var date = getGMTTime();
+
+        var signature = "UPYUN " + operator + ":" + b64hamcsha1(HexMD5.MD5(pwd).toString(HexMD5.enc.Hex), method + "&" + uri +
+                "&" + date);
+
+        console.log(method + "&" + uri + "&" + date)
+        console.log(signature);
+
+        $.ajax({
+            headers: {
+                'Authorization': signature,
+                'X-Date': date,
+                'X-Upyun-Multi-Stage': 'initiate',
+                'X-Upyun-Multi-Length': size,
+                'X-Upyun-Multi-Type': x_upyun_multi_type,
+                'X-Upyun-Multi-Part-Size': x_upyun_multi_part_size,
+                'Content-Length': '0'
+            },
+            url: url,
+            type: "POST",
+            async: true, //异步
+
+            success: function(res, status, xhr) {
+                console.log(xhr.getAllResponseHeaders());
+                x_upyun_multi_uuid = xhr.getResponseHeader("x-upyun-multi-uuid");
+                x_upyun_next_part_id = xhr.getResponseHeader("x-upyun-next-part-id");
+                $('#taskId').html('<h5>初始化分片上传任务，任务ID为：' + x_upyun_multi_uuid + '</h5>');
+                console.log(x_upyun_next_part_id + ',' + x_upyun_multi_uuid);
+                $('#output').html('<h5>开始上传任务</h5><br>');
+                PostFile();
+            }
+        });
+
+    }
+
+
+    //执行分片上传
+    function PostFile() {
+        var name = file.name, //文件名
+            shardSize = x_upyun_multi_part_size, //以为初始化分片任务时设置的分片大小为基准
+            //shardSize = 1024*1024,
+            shardCount = Math.ceil(size / shardSize); //总片数
+        var i = x_upyun_next_part_id;
+        console.log("文件总分片数：" + shardCount);
+        var packet;
+        //不足设置的分片长度的分片处理(最后一片分片)
+        if (x_upyun_remain_size < shardSize) {
+            var start = i * shardSize;
+            var end = size;
+
+            console.log(start, end, i, shardSize); //文件切片起始位置，分片序号，分片大小//
+            $('.percents').text( toPercent(i / shardCount) );
+            $('.percent').html(toPercent(i / shardCount));
+            packet = file.slice(start, end); //将文件进行切片
+        } else {
+            var start = i * shardSize;
+            var end = start + shardSize;
+
+            console.log(start, end, i, shardSize); //文件切片起始位置，分片序号，分片大小//
+            $('.percents').text( toPercent(i / shardCount));
+            $('.percent').html(toPercent(i / shardCount));
+            packet = file.slice(start, end); //将文件进行切片
+        }
+
+        var date = getGMTTime();
+        var signature = "UPYUN " + operator + ":" + b64hamcsha1(HexMD5.MD5(pwd).toString(HexMD5.enc.Hex), method + "&" + uri +
+                "&" + date);
+
+        $.ajax({
+            headers: {
+                'Authorization': signature,
+                'X-Date': date,
+                'X-Upyun-Multi-Stage': 'upload',
+                'X-Upyun-Multi-Uuid': x_upyun_multi_uuid,
+                'X-Upyun-Part-Id': x_upyun_next_part_id
+            },
+            url: url,
+            type: "POST",
+            data: packet,
+            //timeout:"10000",  //超时10秒
+            async: true, //异步
+            dataType: "json",
+            processData: false, //很重要，告诉jquery不要对form进行处理
+            contentType: false, //很重要，指定为false才能形成正确的Content-Type
+            success: function(res, status, xhr) {
+                /*  表示上一块文件上传成功，继续下一次  */
+                if (xhr.status == 204) {
+                    // x_upyun_multi_uuid = xhr.getResponseHeader("x-upyun-multi-uuid");
+                    x_upyun_next_part_id = xhr.getResponseHeader("x-upyun-next-part-id");
+                    x_upyun_next_part_size = xhr.getResponseHeader("x-upyun-next-part-size");
+                    x_upyun_remain_size = xhr.getResponseHeader("x-upyun-remain-size");
+                    if (x_upyun_next_part_size == -1 && x_upyun_next_part_id == -1) { //最后一块分片传递完毕,节点会将part-size和next-part-id置为-1
+                        finishUpload();
+                    } else {
+                        PostFile();
+                    }
+                    // PostFile(x_upyun_next_part_id, x_upyun_next_part_size,x_upyun_remain_size);
+
+                } else if (msg.data.status == 502) {
+                    form = '';
+                    /*  失败后，每2秒继续传一次分片文件  */
+                    setInterval(function() {
+                        PostFile(file, i)
+                    }, 2000);
+                } else if (msg.data.status == 200) {
+                    console.log("上传成功");
+                } else if (msg.data.status == 500) {
+                    console.log('第' + msg.i + '次，上传文件有误！');
+                } else {
+                    console.log('未知错误');
+                }
+            }
+        })
+    }
+
+    function finishUpload() {
+        var date = getGMTTime();
+        var signature = "UPYUN " + operator + ":" + b64hamcsha1(HexMD5.MD5(pwd).toString(HexMD5.enc.Hex), method + "&" + uri +
+                "&" + date);
+
+        $.ajax({
+            headers: {
+                'Authorization': signature,
+                'X-Date': date,
+                'X-Upyun-Multi-Stage': 'complete',
+                'X-Upyun-Multi-Uuid': x_upyun_multi_uuid
+            },
+            url: url,
+            type: "POST",
+            async: true, //异步
+
+            success: function(res, status, xhr) {
+                if (xhr.status == 201) {
+                    console.log(xhr.getAllResponseHeaders());
+                    x_upyun_multi_uuid = xhr.getResponseHeader("x-upyun-multi-uuid");
+                    // alert("上传完毕！");
+                } else if (xhr.status == 204) {
+                    console.log(xhr.getAllResponseHeaders());
+                    x_upyun_multi_uuid = xhr.getResponseHeader("x-upyun-multi-uuid");
+                    // alert("文件上传覆盖完毕！");
+                }
+
+                $('.mask').hide();
+                $('.percents').html('上传完毕！');
+                $("#resultTip").find(".project-modal-del").text("上传成功");
+                $("#resultTip").modal("show");
+            }
+        });
+    }
+
+    function getGMTTime() {
+        var date = new Date();
+        var time = date.toGMTString();
+        console.log(time);
+        return time;
+    }
+
+    function toPercent(point) {
+        var str = Number(point * 100).toFixed(0);
+        str += "%";
+        return str;
+    }
+
+    //设置上传文件的MIME类型
+    function getContentType(){
+        var dom=document.getElementById("slice").value;//根据id得到值
+        var index=dom.lastIndexOf(".")//得到最后一个"."在第几位
+        var suffix = dom.substring(index + 1).toLowerCase(); //截断"."之前的，得到后缀[忽略大写]
+        console.log("上传文件后缀名：" + suffix);
+
+        if(suffix=="bmp"||suffix=="png"||suffix=="gif"||suffix=="jpg"||suffix=="jpeg"){  //根据后缀，判断是否符合图片格式
+            var type = "image/" + suffix;
+            console.log("MIME：" + type);
+            return type;
+        } else if(suffix=="mp4"){
+            var type = "video/" + suffix;
+            console.log("MIME：" + type);
+            return type;
+        } else if(suffix=="pdf"){
+            var type = "application/" + suffix;
+            console.log("MIME：" + type);
+            return type;
+        } else {
+            var type = "application/octet-stream";
+            console.log("MIME：" + type);
+            return type;
+        }
+    }
 </script>
